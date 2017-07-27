@@ -26,7 +26,7 @@ def tyler_parser(args):
 
 if __name__ == '__main__':
     #Test when argument is rule
-    tyler_parser("(they're),(replace with my),(I'm selfish)")
+    #tyler_parser("(they're),(replace with my),(I'm selfish)")
 
     #Test when no arg i.e. default rulefile
     #tyler_parser(None)

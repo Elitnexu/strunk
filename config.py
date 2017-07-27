@@ -3,7 +3,7 @@ import os.path
 import re
 
 #Instance variables
-DEFAULT_RULE_FILE = "rules.csv"
+DEFAULT_RULE_FILE = "rules/rules.strunk"
 ACTIONS = {
     "delete", "replace with %s", "flag"
 }
@@ -18,16 +18,25 @@ def read_config(args):
         #Check for config file
         print "Default rule file specified."
         if(rules_exists(DEFAULT_RULE_FILE)):
-            print "Default rule file found."
+            print "Default rule file detected."
             return DEFAULT_RULE_FILE
         else:
             #Raise error? Create default?
             raise IOError("Default rule file " + DEFAULT_RULE_FILE + " not found")
 
-    #Check if args matches ruleform (regxp)
-    elif re.match(r"\(.*\),\(.*\),\(.*\)", args) is not None:
-        print "RegEx matches "
-        #Maybe change to specify whether regex, filename?
-        return args
+    #Either custom ruleset or regex. Check ruleset first.
     else:
-        raise ValueError("No valid rules found.")
+        #Check if custom ruleset exists
+        print "Custom ruleset specified."
+        custom_ruleset = "rules/" + args + ".strunk"
+        if rules_exists(custom_ruleset):
+            print "Custom ruleset file detected."
+            return custom_ruleset
+
+        #Check if args matches ruleform (regxp)
+        if re.match(r"\(.*\),\(.*\),\(.*\)", args) is not None:
+            print "RegEx matches."
+            #Maybe change to specify whether regex, filename?
+            return "Explicit regex"
+        else:
+            raise ValueError("No valid rules found. Check your syntax!")
