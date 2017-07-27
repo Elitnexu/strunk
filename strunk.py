@@ -1,5 +1,5 @@
 #Takes text and ruleset, outputs results to file
-import config
+import file_parser
 
 #Read in config file
 #Prepare text file
@@ -10,26 +10,21 @@ import config
 #Put into functions?
 #Takes file with keyword, action, comment
 #Outputs Dictionary of keywords and behaviour
-def process_file(filename):
+def process_rules(contents):
     #Read file
     pass
-
-
 
 def strunk(args):
     #Read config file from either config folder or args
     #if args is file, process, if args is ruleform, use.
     #else reject
-    filename = config.read_config(args)
-    process_file(filename)
+
+    #Get dictionary of processed file (if we make it that far)
+    contents = file_parser.file_parser(args)
+    rules = contents.get_dictionary()
+
+    print rules
 
 
 if __name__ == '__main__':
-    #Test when argument is rule
-    #tyler_parser("(they're),(replace with my),(I'm selfish)")
-
-    #Test when no arg i.e. default rulefile
-    #tyler_parser(None)
-
-    #Test when custom rulefile piped in
-    #tyler_parser("custom.csv")
+    strunk(None)
