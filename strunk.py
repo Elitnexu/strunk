@@ -1,4 +1,5 @@
 #Takes text and ruleset, outputs results to file
+import rule_parser
 import file_parser
 
 #Read in config file
@@ -19,9 +20,9 @@ def strunk(args):
     #if args is file, process, if args is ruleform, use.
     #else reject
 
-    #Get dictionary of processed file (if we make it that far)
-    contents = file_parser.file_parser(args)
-    rules = contents.get_dictionary()
+    #Get dictionary of ruleset (if we make it that far)
+    contents = rule_parser.rule_parser(args)
+    rules = contents.get_ruleset()
 
     print rules
 
