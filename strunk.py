@@ -16,7 +16,7 @@ def process_file(filename):
 
 
 
-def tyler_parser(args):
+def strunk(args):
     #Read config file from either config folder or args
     #if args is file, process, if args is ruleform, use.
     #else reject

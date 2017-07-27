@@ -3,7 +3,7 @@ import os.path
 import re
 
 #Instance variables
-DEFAULT_RULE_FILE = "rules/rules.strunk"
+DEFAULT_RULE_FILE = ".strunk"
 ACTIONS = {
     "delete", "replace with %s", "flag"
 }
