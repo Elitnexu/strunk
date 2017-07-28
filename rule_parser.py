@@ -9,21 +9,31 @@ class rule_parser:
         #Instance variables
         self.DEFAULT_RULE_FILE = ".strunk"
         self.ACTIONS = {
-        "delete", "replace with %s", "flag"
+        "delete", "replace %s", "flag"
         }
 
-    def process_file(self, filepath):
+    #Put into functions?
+    #Takes file with keyword, action, comment
+    #Outputs Dictionary of keywords and behaviour
+    def process_ruleset(self, filepath):
 
         try:
             file = open(filepath, "r")
         except:
             raise IOError("File failed to open")
 
-        #Bug: need to remove \n error
         d = {}
         i = 0
         for line in file:
-            d[i] = line
+            #Remove leading/trailing whitespace and newlines
+            line = line.strip()
+            #Ignore comments
+            if line[:1] == '#':
+                continue
+            #Split based on comma
+            re.split(r"\(.*\)", line)
+            d.setdefault(i, [])
+            d[i].append(line)
             i = i + 1
 
         return d
@@ -64,6 +74,6 @@ class rule_parser:
             contents = "Explicit regex"
         else:
             #Open the file and start reading in data
-            contents = self.process_file(filepath)
+            contents = self.process_ruleset(filepath)
 
         return contents
