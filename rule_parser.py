@@ -8,19 +8,22 @@ class rule_parser:
         self.args = args
         #Instance variables
         self.DEFAULT_RULE_FILE = ".strunk"
-        self.ACTIONS = {
-        "delete", "replace %s", "flag"
-        }
+        self.ruleset = None
 
-    #Put into functions?
-    #Takes file with keyword, action, comment
-    #Outputs Dictionary of keywords and behaviour
+    #Get the ruleset from this event, returns None if unassigned
+    def get_ruleset(self):
+        return self.ruleset
+
+    #Process the ruleset file given and converts to a dictionary
+    #for applying to a text file.
+    #@filepath: a .strunk filepath
+    #@return A dictionary of keywords, behaviour and comments
     def process_ruleset(self, filepath):
 
         try:
             file = open(filepath, "r")
         except:
-            raise IOError("File failed to open")
+            raise IOError("Rulefile failed to open")
 
         d = {}
         i = 0
@@ -38,6 +41,10 @@ class rule_parser:
 
         return d
 
+    #Finds the appropriate response to the type of input expected
+    #i.e. given rule, ruleset file, etc. and outputs either a filepath
+    #or a TODO whatever I end up doing with explicit regex
+    #@return string containing a filepath or regex
     def get_file_type(self):
         if self.args is None:
             #Check for config file
@@ -66,8 +73,8 @@ class rule_parser:
             else:
                 raise ValueError("No valid rules found. Check your syntax!")
 
-    def get_ruleset(self):
-        #Main flow
+    #Sets ruleset to imported file
+    def import_ruleset(self):
         filepath = self.get_file_type()
         if filepath == "Explicit regex":
             #TODO Handle explicit rule
@@ -76,4 +83,4 @@ class rule_parser:
             #Open the file and start reading in data
             contents = self.process_ruleset(filepath)
 
-        return contents
+        self.ruleset = contents
