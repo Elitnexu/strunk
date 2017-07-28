@@ -23,6 +23,7 @@ def strunk(progname, textfile, rulefile):
     #Get input file of text (if we make it that far)
     parser = file_parser.file_parser(textfile)
     parser.set_ruleset(rules)
+    parser.open_file()
     print parser.preprocess_file()
 
     #TODO Process text file with ruleset (pass two args)
