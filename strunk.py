@@ -17,8 +17,16 @@ def strunk(progname, textfile, rulefile):
     #Get dictionary of ruleset (if we make it that far)
     ruleset = rule_parser.rule_parser(rulefile)
     ruleset.import_ruleset()
-    rules = ruleset.get_ruleset()
-    print rules
+    rules = []
+    new_rules = ruleset.get_ruleset()
+    for w in new_rules:
+        rules.append(w)
+
+    for w in rules:
+        print w.get_action()
+        #print get_action()
+        #print get_subject()
+        #print get_info()
 
     #Get input file of text (if we make it that far)
     parser = file_parser.file_parser(textfile)

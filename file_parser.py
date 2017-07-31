@@ -1,5 +1,6 @@
-#Parse a file with a ruleset
-#TODO
+#File Parser handles the text file side of strunk, opening and
+#processing text files based on the ruleset given to it.
+
 import re
 
 class file_parser:

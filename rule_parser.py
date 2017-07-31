@@ -1,6 +1,11 @@
-#Ruleset (to be replaced with some other file format)
+#Rule Parser handles the ruleset given, opening and extracting from the
+#ruleset file or command and placing all valid entries into a dictionary.
+#The dictionary is then used as a matcher when compared against the text file
+#input.
+
 import os.path
 import re
+import rule
 
 class rule_parser:
 
@@ -9,8 +14,10 @@ class rule_parser:
         #Instance variables
         self.DEFAULT_RULE_FILE = ".strunk"
         self.ruleset = None
+        #self.NEXT_EXPECTED_TYPE = {'EXP', 'ACT', 'SUB', 'INFO'}
 
     #Get the ruleset from this event, returns None if unassigned
+    #@return The ruleset currently assigned to the parser
     def get_ruleset(self):
         return self.ruleset
 
@@ -25,21 +32,66 @@ class rule_parser:
         except:
             raise IOError("Rulefile failed to open")
 
-        d = {}
-        i = 0
+        empty = "".strip()
+        next_expected = "EXP"
+        rules = []
+        new_rule = None
+        spaces = 0
+
         for line in file:
             #Remove leading/trailing whitespace and newlines
             line = line.strip()
+            print next_expected
+            print line
+
+            rules.append(new_rule)
+            if line == "END": #EOF, deal with better TODO
+                new_rule = None
+                next_expected = "EXP"
+                spaces = 0
+                continue
             #Ignore comments
             if line[:1] == '#':
                 continue
-            #Split based on comma
-            re.split(r"\(.*\)", line)
-            d.setdefault(i, [])
-            d[i].append(line)
-            i = i + 1
+            #Handle expression
+            if next_expected == "EXP":
+                exp_key = line
+                new_rule = rule.rule(exp_key)
+                next_expected = "ACT"
+                continue
+            #Handle action type
+            if next_expected == "ACT":
+                new_rule.set_action = line
+                next_expected = "SUB"
+                continue
+            #Handle subject type
+            if next_expected == "SUB":
+                new_rule.set_subject = line
+                next_expected = "INFO"
+                continue
+            #Handle information
+            if next_expected == "INFO":
+                #Reached the end of info, next rule, fix if statements
+                if spaces == 1 and line == "":
+                    rules.append(new_rule)
+                    new_rule = None
+                    next_expected = "EXP"
+                    spaces = 0
+                    continue
+                elif line == "":
+                    new_rule.append_info(line)
+                    spaces = 1
+                    continue
+                else:
+                    new_rule.append_info(line)
+                    spaces = 0
+                    continue
+                    #Keep going until double space
+            #Somehow you got here
+            else:
+                raise Error("Why are you here? Line = " + line)
+        return rules
 
-        return d
 
     #Finds the appropriate response to the type of input expected
     #i.e. given rule, ruleset file, etc. and outputs either a filepath
