@@ -44,8 +44,9 @@ class rule_parser:
             print next_expected
             print line
 
-            rules.append(new_rule)
+            #rules.append(new_rule)
             if line == "END": #EOF, deal with better TODO
+                rules.append(new_rule)
                 new_rule = None
                 next_expected = "EXP"
                 spaces = 0
@@ -61,29 +62,29 @@ class rule_parser:
                 continue
             #Handle action type
             if next_expected == "ACT":
-                new_rule.set_action = line
+                new_rule.set_action(line)
                 next_expected = "SUB"
                 continue
             #Handle subject type
             if next_expected == "SUB":
-                new_rule.set_subject = line
+                new_rule.set_subject(line)
                 next_expected = "INFO"
                 continue
             #Handle information
             if next_expected == "INFO":
                 #Reached the end of info, next rule, fix if statements
                 if spaces == 1 and line == "":
-                    rules.append(new_rule)
+                    rules[exp_key] = new_rule
                     new_rule = None
                     next_expected = "EXP"
                     spaces = 0
                     continue
                 elif line == "":
-                    new_rule.append_info(line)
+                    new_rule.append_info(line + "\n")
                     spaces = 1
                     continue
                 else:
-                    new_rule.append_info(line)
+                    new_rule.append_info(line + "\n")
                     spaces = 0
                     continue
                     #Keep going until double space

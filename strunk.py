@@ -19,14 +19,14 @@ def strunk(progname, textfile, rulefile):
     ruleset.import_ruleset()
     rules = []
     new_rules = ruleset.get_ruleset()
-    for w in new_rules:
-        rules.append(w)
+    rules = new_rules
 
+    #Test correct parsing of rules
     for w in rules:
+        print w.get_expression()
         print w.get_action()
-        #print get_action()
-        #print get_subject()
-        #print get_info()
+        print w.get_subject()
+        print w.get_info()
 
     #Get input file of text (if we make it that far)
     parser = file_parser.file_parser(textfile)
