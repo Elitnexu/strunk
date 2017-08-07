@@ -9,9 +9,9 @@ class file_parser:
         #Instance variables
         self.file = None
         self.filepath = filepath
-        self.ACTIONS = {
-        "add", "delete", "replace %s", "flag"
-        }
+        #self.ACTIONS = {
+        #"add", "delete", "replace %s", "flag"
+        #}
         self.ruleset = None
         self.DELIMITERS = {
         ".!?"
@@ -28,6 +28,22 @@ class file_parser:
             raise IOError("Textfile failed to open")
 
         self.file = file
+
+
+    def apply_ruleset(self):
+        #For the given ruleset, apply the rules.
+        #Compile ruleset
+        print len(self.ruleset)
+        for rule in self.ruleset:
+            #Making code more readable
+            rule = self.ruleset[rule]
+            #print "Expression: " + rule.get_expression()
+            #print "Senteces length: " + str(len(self.sentences))
+            for line in self.sentences:
+                if re.search(rule.get_expression(), line) is not None:
+                    print "Match found for " + rule.get_expression() + " : " + line
+
+
 
     def preprocess_file(self):
         #read in file contents
@@ -55,10 +71,12 @@ class file_parser:
                             sentence = w
                         else:
                             self.sentences.append(w)
-            else:
+            else: #full line, add to previous sentence
                 sentence += line
             i = i + 1
 
+        for line in self.sentences:
+            print " Line: " + line
         return self.sentences
 
     #Set ruleset dictionary

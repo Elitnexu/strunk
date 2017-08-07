@@ -2,7 +2,8 @@
 #ruleset file or command and placing all valid entries into a dictionary.
 #The dictionary is then used as a matcher when compared against the text file
 #input.
-
+#Rule Parser takes multiple rulesets? Extension? Consider leaving this
+#option open while designing interface
 import os.path
 import re
 import rule
@@ -34,7 +35,7 @@ class rule_parser:
 
         empty = "".strip()
         next_expected = "EXP"
-        rules = []
+        rules = {}
         new_rule = None
         spaces = 0
 
@@ -46,7 +47,7 @@ class rule_parser:
 
             #rules.append(new_rule)
             if line == "END": #EOF, deal with better TODO
-                rules.append(new_rule)
+                rules[exp_key] = new_rule
                 new_rule = None
                 next_expected = "EXP"
                 spaces = 0
@@ -72,6 +73,7 @@ class rule_parser:
                 continue
             #Handle information
             if next_expected == "INFO":
+                print "Spaces: " + str()
                 #Reached the end of info, next rule, fix if statements
                 if spaces == 1 and line == "":
                     rules[exp_key] = new_rule
