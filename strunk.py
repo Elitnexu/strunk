@@ -17,9 +17,9 @@ def strunk(progname, textfile, rulefile):
     #Get dictionary of ruleset (if we make it that far)
     ruleset = rule_parser.rule_parser(rulefile)
     ruleset.import_ruleset()
-    rules = []
-    new_rules = ruleset.get_ruleset()
-    rules = new_rules
+    #rules = []
+    rules = ruleset.get_ruleset()
+    #rules = new_rules
 
     #Get input file of text (if we make it that far)
     parser = file_parser.file_parser(textfile)
@@ -27,7 +27,8 @@ def strunk(progname, textfile, rulefile):
     parser.open_file()
     parser.preprocess_file()
     parser.apply_ruleset()
-    
+    parser.write_new_file()
+
     #TODO Write edited rules to file, check that editor actually writes changes
 
 if __name__ == '__main__':

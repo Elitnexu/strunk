@@ -99,7 +99,7 @@ class file_parser:
                 line = re.split('[!?.]', line)
 
                 #Append second half of sentence to previous sentence
-                line[0] = sentence + " " + line[0]
+                line[0] = sentence + "\n" + line[0]
                 self.sentences.append(line[0])
                 if len(line) > 1:
                     #Process all sentences and append to list
@@ -112,7 +112,8 @@ class file_parser:
                         else:
                             self.sentences.append(w)
             else: #full line, add to previous sentence
-                sentence += line
+                #sentence += line
+                sentence = sentence + "\n" + line
             i = i + 1
         #DEBUG
         #for line in self.sentences:
@@ -160,8 +161,18 @@ class file_parser:
 
     #Takes the sentence array and writes it to new file
     def write_new_file(self):
-        #Overwrite file based on config settings
-        pass
+        try:
+            file = open("strunked_" + self.filepath, "w+")
+        except:
+            raise IOError("Strunked file failed to open")
+
+        print "Writing Strunked file to " + "strunked_" + self.filepath + "..."
+        #TODO Change behaviour based on config file
+        for line in self.sentences:
+            file.write(line)
+
+        file.close()
+        print "Done!"
 
     #Set ruleset dictionary
     def set_ruleset(self, ruleset):
