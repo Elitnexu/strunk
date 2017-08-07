@@ -33,17 +33,52 @@ class file_parser:
     def apply_ruleset(self):
         #For the given ruleset, apply the rules.
         #Compile ruleset
-        print len(self.ruleset)
         for rule in self.ruleset:
             #Making code more readable
             rule = self.ruleset[rule]
             #print "Expression: " + rule.get_expression()
             #print "Senteces length: " + str(len(self.sentences))
-            for line in self.sentences:
+            for index, line in enumerate(self.sentences):
                 if re.search(rule.get_expression(), line) is not None:
                     print "Match found for " + rule.get_expression() + " : " + line
+                    #Print context, give options
+                    self.handle_rule_match(rule, line, index)
 
-
+    def handle_rule_match(self, rule, line, index):
+        #Takes a rule, prints match, etc. and gives options.
+        print "Expression: " + rule.get_expression()
+        print "Action: " + rule.get_action()
+        print "Subject:" + rule.get_subject()
+        print "--OPTIONS--"
+        #Due to action only being WARNING for now, this is static.
+        print "[E]dit line, [S]kip, More [I]nformation"
+        while True:
+            try:
+                #print "--OPTIONS--"
+                #Due to action only being WARNING for now, this is static.
+                #print "[E]dit line, [S]kip, More [I]nformation"
+                response = raw_input("Reply: ")
+                if response.lower() == 'e':
+                    print "Editing file..."
+                    #Edit file with index
+                    #some_file_handler()
+                    break
+                elif response.lower() == 's':
+                    print "Skipping..."
+                    #Skip to next line
+                    break
+                elif response.lower() == 'i':
+                    #Display more info
+                    info = rule.get_info()
+                    for contents in info:
+                        print contents
+                else:
+                    #Invalid input
+                    print "Please enter a valid option."
+                    continue
+            except ValueError:
+                print "Please enter a valid option."
+                continue
 
     def preprocess_file(self):
         #read in file contents
@@ -74,9 +109,9 @@ class file_parser:
             else: #full line, add to previous sentence
                 sentence += line
             i = i + 1
-
-        for line in self.sentences:
-            print " Line: " + line
+        #DEBUG
+        #for line in self.sentences:
+        #    print " Line: " + line
         return self.sentences
 
     #Set ruleset dictionary

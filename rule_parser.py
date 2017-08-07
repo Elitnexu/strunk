@@ -42,8 +42,8 @@ class rule_parser:
         for line in file:
             #Remove leading/trailing whitespace and newlines
             line = line.strip()
-            print next_expected
-            print line
+            #print next_expected
+            #print line
 
             #rules.append(new_rule)
             if line == "END": #EOF, deal with better TODO
@@ -73,7 +73,6 @@ class rule_parser:
                 continue
             #Handle information
             if next_expected == "INFO":
-                print "Spaces: " + str()
                 #Reached the end of info, next rule, fix if statements
                 if spaces == 1 and line == "":
                     rules[exp_key] = new_rule
@@ -82,11 +81,11 @@ class rule_parser:
                     spaces = 0
                     continue
                 elif line == "":
-                    new_rule.append_info(line + "\n")
+                    new_rule.append_info(line)
                     spaces = 1
                     continue
                 else:
-                    new_rule.append_info(line + "\n")
+                    new_rule.append_info(line)
                     spaces = 0
                     continue
                     #Keep going until double space

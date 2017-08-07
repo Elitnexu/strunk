@@ -5,7 +5,7 @@ class rule:
         self.EXPRESSION = expression
         self.action = None
         self.subject = None
-        self.info = ""
+        self.info = [""]
         #self.NEXT_EXPECTED_TYPE = {'EXP', 'ACT', 'SUB', 'INFO'}
 
     def set_action(self, action):
@@ -18,7 +18,7 @@ class rule:
         self.info = info
 
     def append_info(self, info):
-        self.info += info
+        self.info.append(info)
 
     def get_expression(self):
         return self.EXPRESSION

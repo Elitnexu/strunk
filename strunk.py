@@ -24,8 +24,8 @@ def strunk(progname, textfile, rulefile):
 
     #DEBUG
     #Test correct parsing of rules
-    for w in rules:
-        print rules[w].get_expression()
+    #for w in rules:
+        #print rules[w].get_expression()
         #print w.get_action()
         #print w.get_subject()
         #print w.get_info()
