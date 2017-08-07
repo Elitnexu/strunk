@@ -4,8 +4,6 @@
 import re
 import subprocess
 import os
-#test
-import webbrowser
 
 class file_parser:
 
@@ -14,9 +12,6 @@ class file_parser:
         self.file = None
         self.filepath = filepath
         self.SENTENCE_PATH = "temp.strunk"
-        #self.ACTIONS = {
-        #"add", "delete", "replace %s", "flag"
-        #}
         self.ruleset = None
         self.DELIMITERS = {
         ".!?"
@@ -45,9 +40,11 @@ class file_parser:
             #print "Senteces length: " + str(len(self.sentences))
             for index, line in enumerate(self.sentences):
                 if re.search(rule.get_expression(), line) is not None:
+                    print "\n"
                     print "Match found for " + rule.get_expression() + " : " + line
                     #Print context, give options
                     self.handle_rule_match(rule, line, index)
+
 
     def handle_rule_match(self, rule, line, index):
         #Takes a rule, prints match, etc. and gives options.
@@ -135,25 +132,36 @@ class file_parser:
         file.write(line)
         file.close()
 
+        #Attempt to find default editor, set to vi if none found
         try:
             editor = os.environ['EDITOR']
         except KeyError:
-            print "Default editor not found. Setting to 'nano'..."
+            print "Default editor not found. Setting to 'vi'..."
             editor = 'vi'
 
-        subprocess.Popen([editor, self.SENTENCE_PATH]).wait()
-        #When done, open and write new sentence to file
+        #Attempt to open editor and wait until its closed to continue
+        try:
+            subprocess.Popen([editor, self.SENTENCE_PATH]).wait()
+            #When done, open and write new sentence to file
+        except:
+            raise IOError("No editor found.")
 
+        #Attempt to open sentence file to read edited line
         try:
             file = open(self.SENTENCE_PATH, "r+")
         except:
-            raise IOError("Sentence file failed to open")
+            raise IOError("Sentence file failed to open.")
 
         #Read contents, delete contents when done
         line = file.read()
         self.sentences[index] = line
         file.truncate(0)
         file.close()
+
+    #Takes the sentence array and writes it to new file
+    def write_new_file(self):
+        #Overwrite file based on config settings
+        pass
 
     #Set ruleset dictionary
     def set_ruleset(self, ruleset):

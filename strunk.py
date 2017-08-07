@@ -21,27 +21,14 @@ def strunk(progname, textfile, rulefile):
     new_rules = ruleset.get_ruleset()
     rules = new_rules
 
-
-    #DEBUG
-    #Test correct parsing of rules
-    #for w in rules:
-        #print rules[w].get_expression()
-        #print w.get_action()
-        #print w.get_subject()
-        #print w.get_info()
-
     #Get input file of text (if we make it that far)
     parser = file_parser.file_parser(textfile)
     parser.set_ruleset(rules)
     parser.open_file()
     parser.preprocess_file()
-    #DEBUG
-    #printget key from dict python parser.preprocess_file()
-
-    #TODO Process text file with ruleset (pass two args)
-    #new file_parser
     parser.apply_ruleset()
-
+    
+    #TODO Write edited rules to file, check that editor actually writes changes
 
 if __name__ == '__main__':
     args = ("strunk", "gatsby.txt", None)
