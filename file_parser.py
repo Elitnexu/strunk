@@ -2,6 +2,10 @@
 #processing text files based on the ruleset given to it.
 
 import re
+import subprocess
+import os
+#test
+import webbrowser
 
 class file_parser:
 
@@ -9,6 +13,7 @@ class file_parser:
         #Instance variables
         self.file = None
         self.filepath = filepath
+        self.SENTENCE_PATH = "temp.strunk"
         #self.ACTIONS = {
         #"add", "delete", "replace %s", "flag"
         #}
@@ -61,7 +66,10 @@ class file_parser:
                 if response.lower() == 'e':
                     print "Editing file..."
                     #Edit file with index
-                    #some_file_handler()
+                    oldLine = line
+                    self.edit_sentence(line, index)
+                    print "Edited! oldLine = " + oldLine
+                    print "New line = " + self.sentences[index]
                     break
                 elif response.lower() == 's':
                     print "Skipping..."
@@ -113,6 +121,39 @@ class file_parser:
         #for line in self.sentences:
         #    print " Line: " + line
         return self.sentences
+
+    def edit_sentence(self, line, index):
+        #write temp file with sentence as only contents
+        #open with default editor
+        #take file changes and save as new sentence index
+        line = line.strip()
+        try:
+            file = open(self.SENTENCE_PATH, "w+")
+        except:
+            raise IOError("Sentence file failed to open")
+
+        file.write(line)
+        file.close()
+
+        try:
+            editor = os.environ['EDITOR']
+        except KeyError:
+            print "Default editor not found. Setting to 'nano'..."
+            editor = 'vi'
+
+        subprocess.Popen([editor, self.SENTENCE_PATH]).wait()
+        #When done, open and write new sentence to file
+
+        try:
+            file = open(self.SENTENCE_PATH, "r+")
+        except:
+            raise IOError("Sentence file failed to open")
+
+        #Read contents, delete contents when done
+        line = file.read()
+        self.sentences[index] = line
+        file.truncate(0)
+        file.close()
 
     #Set ruleset dictionary
     def set_ruleset(self, ruleset):
