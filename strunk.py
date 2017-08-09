@@ -1,6 +1,7 @@
 #Takes text and ruleset, outputs results to file
 import rule_parser
 import file_parser
+import sys
 
 #Read in config file
 #Prepare text file
@@ -30,5 +31,13 @@ def strunk(progname, textfile, rulefile):
     #TODO Write edited rules to file, check that editor actually writes changes
 
 if __name__ == '__main__':
+    #Testing
     args = ("strunk", "gatsby.txt", None)
     strunk(*args)
+    #if len(sys.argv) == 2:
+    #    sys.argv.append(None)
+    #    strunk(*sys.argv)
+    #elif len(sys.argv) == 3:
+    #    strunk(*sys.argv)
+    #else:
+    #    raise ValueError("Invalid argument syntax. Check usage for info.")
