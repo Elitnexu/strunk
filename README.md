@@ -1,6 +1,11 @@
 # Strunk
 
-TODO: What does this do
+Strunk is a command-line tool for parsing text documents written in Python.
+
+It takes in a user-defined regular expression ruleset in the form of a
+.strunk file and checks a given text document for matches with the rules
+provided. For each match found, the user is given the choice to edit the
+matching sentence in the text and save any changes made.
 
 ## Getting Started
 

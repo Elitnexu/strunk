@@ -2,3 +2,6 @@
 .cache
 .strunk
 tests/
+Strunk.egg-info/
+build/
+dist/

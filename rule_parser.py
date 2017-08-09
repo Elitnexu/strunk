@@ -51,8 +51,8 @@ class rule_parser:
                 new_rule = None
                 next_expected = "EXP"
                 spaces = 0
+                #Ignore comments
                 continue
-            #Ignore comments
             if line[:1] == '#':
                 continue
             #Handle expression

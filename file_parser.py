@@ -85,6 +85,8 @@ class file_parser:
                 print "Please enter a valid option."
                 continue
 
+        print "Completed rule application!"
+
     def preprocess_file(self):
         #read in file contents
         i = 0
@@ -168,6 +170,7 @@ class file_parser:
 
         print "Writing Strunked file to " + "strunked_" + self.filepath + "..."
         #TODO Change behaviour based on config file
+        #Change to process all at once? Might fix the sentence fragmentation
         for line in self.sentences:
             file.write(line)
 
