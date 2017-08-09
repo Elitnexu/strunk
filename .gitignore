@@ -1,5 +1,8 @@
 *.pyc
+custom.strunk
 .cache
 Strunk.egg-info/
 build/
 dist/
+tests/tests.txt
+strunked_gatsby.txt
