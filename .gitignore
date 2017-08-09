@@ -1,6 +1,5 @@
 *.pyc
 .cache
-.strunk
 Strunk.egg-info/
 build/
 dist/

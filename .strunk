@@ -1,0 +1,29 @@
+#Ignore lines with comments in code
+#(keyword), (action), (comment) format
+#/there/, (error), (Drain the Swamp of Corrupt there's)
+#(their), (error), (Replace with Make Python Great Again)
+#(they're), (flag), (They're is FAKE NEWS)
+#Use template Sam spoke with you about
+#=DO NOT REMOVE FROM TEST DIRECTORY=
+#Test file for Strunk.
+\bGatsby\b
+WARNING
+This is a subject line#1
+This is an info line#1
+This is a more info line#1
+
+
+\bNick\b
+WARNING
+This is a subject line#2
+This is an info line#2
+This is a more info line#2
+This is another more info line#2
+
+
+\bpod racing\b
+WARNING
+This is a subject line#3
+This is an info line#3
+
+END
