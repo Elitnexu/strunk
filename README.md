@@ -7,6 +7,9 @@ It takes in a user-defined regular expression ruleset in the form of a
 provided. For each match found, the user is given the choice to edit the
 matching sentence in the text and save any changes made.
 
+Strunk is named after [William Strunk](https://en.wikipedia.org/wiki/William_Strunk_Jr.),
+author of [The Elements of Style](https://en.wikipedia.org/wiki/The_Elements_of_Style).
+
 ## Getting Started
 
 TODO
