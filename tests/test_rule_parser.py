@@ -30,8 +30,17 @@ class RuleParserTest(unittest.TestCase):
         ValueError, lambda: ruleset.get_file_type()
         )
 
-    def test_import_ruleset(self):
-        pass
+    def test_process_ruleset(self):
+        #Preparation for tests
+        ruleset.args = "tests/tests"
+        filepath = ruleset.get_file_type()
+
+        #Ruleset is parsed successfully
+        ruleset.process_ruleset(filepath)
+        #FNF
+        self.assertRaises(
+        IOError, lambda: ruleset.process_ruleset(filepath + ".shouldnotexist")
+        )
 
 
 if __name__ == '__main__':
