@@ -5,4 +5,5 @@ Strunk.egg-info/
 build/
 dist/
 tests/tests.txt
+tests.txt
 strunked_gatsby.txt
