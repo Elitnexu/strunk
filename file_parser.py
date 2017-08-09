@@ -96,12 +96,15 @@ class file_parser:
             #Remove leading/trailing whitespace and newlines
             line = line.strip()
             if line == '':
+                self.sentences.append("\n")
                 continue
             if re.match(r'.+[!?.].*', line) is not None:
-                line = re.split('[!?.]', line)
+                #line = re.split('[!?.]', line)
+                line = re.findall(r'.+[!?.].*', line, re.DOTALL)
 
-                #Append second half of sentence to previous sentence
-                line[0] = sentence + "\n" + line[0]
+                if i != 0:
+                    #Append second half of sentence to previous sentence
+                    line[0] = sentence + "\n" + line[0]
                 self.sentences.append(line[0])
                 if len(line) > 1:
                     #Process all sentences and append to list

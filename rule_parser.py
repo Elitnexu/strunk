@@ -22,12 +22,13 @@ class rule_parser:
     def get_ruleset(self):
         return self.ruleset
 
+
     #Process the ruleset file given and converts to a dictionary
     #for applying to a text file.
     #@filepath: a .strunk filepath
     #@return A dictionary of keywords, behaviour and comments
     def process_ruleset(self, filepath):
-
+        #Open file
         try:
             file = open(filepath, "r")
         except:
@@ -38,6 +39,7 @@ class rule_parser:
         rules = {}
         new_rule = None
         spaces = 0
+        exp_key = None
 
         for line in file:
             #Remove leading/trailing whitespace and newlines
@@ -93,7 +95,6 @@ class rule_parser:
             else:
                 raise AssertionError("Why are you here? Line = " + line)
         return rules
-
 
     #Finds the appropriate response to the type of input expected
     #i.e. given rule, ruleset file, etc. and outputs either a filepath
