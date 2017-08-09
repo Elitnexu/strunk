@@ -118,12 +118,6 @@ class rule_parser:
             if os.path.isfile(custom_ruleset):
                 print "Custom ruleset file detected."
                 return custom_ruleset
-
-            #Check if args matches ruleform (regxp)
-            if re.match(r"\(.*\),\(.*\),\(.*\)", self.args) is not None:
-                print "RegEx matches."
-                #Maybe change to specify whether regex, filename?
-                return "Explicit regex"
             else:
                 raise ValueError("No valid rules found. Check your syntax!")
 

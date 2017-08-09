@@ -1,0 +1,6 @@
+Test Case:
+If a match is found, and its edited, what happens if an error is introduced
+from an earlier expression? Presumably, it skips and only after evaluation
+by strunk a second time is it caught.
+Alternatively, introduce an unlimited mode to strunk as an option, parse until
+0 errors for some finite time.
