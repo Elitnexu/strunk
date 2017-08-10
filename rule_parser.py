@@ -40,8 +40,10 @@ class rule_parser:
         new_rule = None
         spaces = 0
         exp_key = None
+        ended = False
 
         for line in file:
+            ended = False
             #Remove leading/trailing whitespace and newlines
             line = line.strip()
             #print next_expected
@@ -53,6 +55,7 @@ class rule_parser:
                 new_rule = None
                 next_expected = "EXP"
                 spaces = 0
+                ended = True
                 continue
             #Ignore comments
             if line[:1] == '#':
@@ -93,8 +96,11 @@ class rule_parser:
                     #Keep going until double space
             #Somehow you got here
             else:
-                raise AssertionError("Why are you here? Line = " + line)
-        return rules
+                raise ValueError("Why are you here? Line = " + line)
+        if ended:
+            return rules
+        else:
+            raise SyntaxError("Rule file ended unexpectedly. Check .strunk file syntax.")
 
     #Finds the appropriate response to the type of input expected
     #i.e. given rule, ruleset file, etc. and outputs either a filepath

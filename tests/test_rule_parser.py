@@ -37,11 +37,19 @@ class RuleParserTest(unittest.TestCase):
 
         #Ruleset is parsed successfully
         ruleset.process_ruleset(filepath)
-        #FNF
+
+        #Ruleset syntax is invalid
+        ruleset.args = "tests/failed_test"
+        filepath = ruleset.get_file_type()
+
+        self.assertRaises(
+        SyntaxError, lambda: ruleset.process_ruleset(filepath)
+        )
+
+        #Ruleset file specified not found
         self.assertRaises(
         IOError, lambda: ruleset.process_ruleset(filepath + ".shouldnotexist")
         )
-
 
 if __name__ == '__main__':
     unittest.main()

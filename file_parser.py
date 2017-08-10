@@ -106,6 +106,7 @@ class file_parser:
                     #Append second half of sentence to previous sentence
                     line[0] = sentence + "\n" + line[0]
                 self.sentences.append(line[0])
+                #...why is this if branch in here again?
                 if len(line) > 1:
                     #Process all sentences and append to list
                     for w in line:
@@ -159,10 +160,15 @@ class file_parser:
             raise IOError("Sentence file failed to open.")
 
         #Read contents, delete contents when done
-        line = file.read()
+        lines = file.read()
+        #for line in lines:
+        #Go by above later, mite b. cool
+        #TEST IF THIS FIXES EDItiNG
+        #line = line.strip()
         self.sentences[index] = line
         file.truncate(0)
         file.close()
+        os.remove(self.SENTENCE_PATH)
 
     #Takes the sentence array and writes it to new file
     def write_new_file(self):
