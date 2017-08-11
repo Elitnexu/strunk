@@ -5,8 +5,10 @@ import re
 import subprocess
 
 
-def rule_applier(ruleset, parser):
+def rule_applier(ruleset, p_parser):
 
+    global parser
+    parser = p_parser
     global sentences
     sentences = parser.get_sentences()
     apply_ruleset(ruleset)
@@ -138,7 +140,8 @@ def edit_sentence(sentences, filepath, line, index):
     #Go by above later, mite b. cool
     #TEST IF THIS FIXES EDItiNG
     #line = line.strip()
-    sentences[index] = line
+    parser.set_sentence(index, lines)
+    #sentences[index] = line
     file.truncate(0)
     file.close()
     os.remove(filepath)
@@ -150,6 +153,7 @@ def write_new_file(filepath):
     print "Writing Strunked file to " + "strunked_" + filepath + "..."
     #TODO Change behaviour based on config file
     #Change to process all at once? Might fix the sentence fragmentation
+    sentences = parser.get_sentences()
     for line in sentences:
         file.write(line)
     file.close()

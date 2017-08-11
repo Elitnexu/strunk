@@ -38,6 +38,9 @@ class file_parser:
     def set_file(self, file):
         self.file = file
 
+    def set_sentence(self, index, line):
+        self.sentences[index] = line
+
     def preprocess_file(self):
         #read in file contents
         i = 0
