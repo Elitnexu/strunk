@@ -2,6 +2,7 @@
 import lib.rule_parser.rule_parser as rule_parser
 import lib.rule_parser.rule as rule
 import lib.file_parser.file_parser as file_parser
+import lib.strunk.rule_applier as rule_applier
 #import file_parser
 import sys
 
@@ -24,12 +25,11 @@ def strunk(progname, textfile, rulefile):
     parser = file_parser.file_parser(textfile)
     parser.set_ruleset(rules)
 
-    parser.file = parser.open_file(parser.filepath, "r")
+    parser.set_file(parser.open_file(parser.filepath, "r"))
     parser.preprocess_file()
 
-    parser.apply_ruleset()
-    parser.write_new_file()
-
+    rule_applier.rule_applier(rules, parser)
+    #TODO Abstract this out
     #TODO Write edited rules to file, check that editor actually writes changes
 
 if __name__ == '__main__':
