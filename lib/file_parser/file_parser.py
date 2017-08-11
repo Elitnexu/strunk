@@ -18,17 +18,16 @@ class file_parser:
         }
         self.sentences = []
 
-    def open_file(self):
+    def open_file(self, filepath, mode):
         #Take the filepath specified
         #Attempt to open
         #If works, we ready for main show
         try:
-            file = open(self.filepath, "r")
+            return open(filepath, mode)
         except:
-            raise IOError("Textfile failed to open")
-
-        self.file = file
-
+            raise IOError("Text file at " + filepath
+                        + " in mode " + mode
+                        + " failed to open.")
 
     def apply_ruleset(self):
         #For the given ruleset, apply the rules.
@@ -131,11 +130,7 @@ class file_parser:
         #open with default editor
         #take file changes and save as new sentence index
         line = line.strip()
-        try:
-            file = open(self.SENTENCE_PATH, "w+")
-        except:
-            raise IOError("Sentence file failed to open")
-
+        file = self.open_file(self.SENTENCE_PATH, "w+")
         file.write(line)
         file.close()
 
@@ -154,13 +149,11 @@ class file_parser:
             raise IOError("No editor found.")
 
         #Attempt to open sentence file to read edited line
-        try:
-            file = open(self.SENTENCE_PATH, "r+")
-        except:
-            raise IOError("Sentence file failed to open.")
+        file = self.open_file(self.SENTENCE_PATH, "r+")
 
         #Read contents, delete contents when done
         lines = file.read()
+
         #for line in lines:
         #Go by above later, mite b. cool
         #TEST IF THIS FIXES EDItiNG
@@ -172,10 +165,7 @@ class file_parser:
 
     #Takes the sentence array and writes it to new file
     def write_new_file(self):
-        try:
-            file = open("strunked_" + self.filepath, "w+")
-        except:
-            raise IOError("Strunked file failed to open")
+        file = self.open_file("strunked_" + self.filepath, "w+")
 
         print "Writing Strunked file to " + "strunked_" + self.filepath + "..."
         #TODO Change behaviour based on config file

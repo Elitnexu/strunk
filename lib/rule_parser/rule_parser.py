@@ -22,6 +22,11 @@ class rule_parser:
     def get_ruleset(self):
         return self.ruleset
 
+    def open_file(self, filepath, mode):
+        try:
+            return open(filepath, mode)
+        except:
+            raise IOError("File at " + filepath + " failed to open")
 
     #Process the ruleset file given and converts to a dictionary
     #for applying to a text file.
@@ -29,10 +34,7 @@ class rule_parser:
     #@return A dictionary of keywords, behaviour and comments
     def process_ruleset(self, filepath):
         #Open file
-        try:
-            file = open(filepath, "r")
-        except:
-            raise IOError("Rulefile failed to open")
+        file = self.open_file(filepath, "r")
 
         empty = "".strip()
         next_expected = "EXP"
@@ -106,7 +108,7 @@ class rule_parser:
     #i.e. given rule, ruleset file, etc. and outputs either a filepath
     #or a TODO whatever I end up doing with explicit regex
     #@return string containing a filepath or regex
-    def get_file_type(self):
+    def get_strunk_path(self):
         if self.args is None:
             #Check for config file
             print "Default rule file specified."
@@ -130,12 +132,9 @@ class rule_parser:
 
     #Sets ruleset to imported file
     def import_ruleset(self):
-        filepath = self.get_file_type()
-        if filepath == "Explicit regex":
-            #TODO Handle explicit rule
-            contents = "Explicit regex"
-        else:
-            #Open the file and start reading in data
-            contents = self.process_ruleset(filepath)
+        #Get the path to specified (or not) rulefile
+        filepath = self.get_strunk_path()
+        #Open the file and start reading in data
+        contents = self.process_ruleset(filepath)
 
         self.ruleset = contents

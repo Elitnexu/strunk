@@ -24,7 +24,8 @@ def strunk(progname, textfile, rulefile):
     parser = file_parser.file_parser(textfile)
     parser.set_ruleset(rules)
 
-    parser.open_file()
+    #"r?"
+    parser.file = parser.open_file(parser.filepath, "r")
     parser.preprocess_file()
 
     parser.apply_ruleset()
