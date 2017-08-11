@@ -1,5 +1,5 @@
 import unittest
-import rule_parser
+import lib.rule_parser.rule_parser as rule_parser
 #import os
 
 class RuleParserTest(unittest.TestCase):
