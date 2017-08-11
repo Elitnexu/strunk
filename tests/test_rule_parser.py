@@ -11,36 +11,36 @@ class RuleParserTest(unittest.TestCase):
     #Replace with function that fills in data
     testfile = open("tests/tests.strunk", "r")
 
-    def test_get_file_type(self):
+    def test_get_strunk_path(self):
         #No argument given, so return the default file
         ruleset.args = None
         self.assertEqual(
-        ruleset.get_file_type(), ".strunk"
+        ruleset.get_strunk_path(), ".strunk"
         )
 
         #Argument is custom filename
         ruleset.args = "tests/tests"
         self.assertEqual(
-        ruleset.get_file_type(), "tests/tests.strunk"
+        ruleset.get_strunk_path(), "tests/tests.strunk"
         )
 
         #Argument is invalid file
         ruleset.args = "tests/noexist"
         self.assertRaises(
-        ValueError, lambda: ruleset.get_file_type()
+        ValueError, lambda: ruleset.get_strunk_path()
         )
 
     def test_process_ruleset(self):
         #Preparation for tests
         ruleset.args = "tests/tests"
-        filepath = ruleset.get_file_type()
+        filepath = ruleset.get_strunk_path()
 
         #Ruleset is parsed successfully
         ruleset.process_ruleset(filepath)
 
         #Ruleset syntax is invalid
         ruleset.args = "tests/failed_test"
-        filepath = ruleset.get_file_type()
+        filepath = ruleset.get_strunk_path()
 
         self.assertRaises(
         SyntaxError, lambda: ruleset.process_ruleset(filepath)
