@@ -32,18 +32,29 @@ class file_parser:
     def apply_ruleset(self):
         #For the given ruleset, apply the rules.
         #Compile ruleset
-        for rule in self.ruleset:
-            #Making code more readable
-            rule = self.ruleset[rule]
-            #print "Expression: " + rule.get_expression()
-            #print "Senteces length: " + str(len(self.sentences))
-            for index, line in enumerate(self.sentences):
-                if re.search(rule.get_expression(), line) is not None:
-                    print "\n"
-                    print "Match found for " + rule.get_expression() + " : " + line
-                    #Print context, give options
-                    self.handle_rule_match(rule, line, index)
+        action = "default"
 
+        try:
+            for rule in self.ruleset:
+                #Making code more readable
+                rule = self.ruleset[rule]
+                #print "Expression: " + rule.get_expression()
+                #print "Senteces length: " + str(len(self.sentences))
+                for index, line in enumerate(self.sentences):
+                    if re.search(rule.get_expression(), line) is not None:
+                        print "\n"
+                        print "Match found for " + rule.get_expression() + " : " + line
+                        #Print context, give options
+                        action = self.handle_rule_match(rule, line, index)
+                        if action == "skip": #Skip current rule
+                            action = "default"
+                            break
+                        if action == "skip_all": #Skip all rules
+                            raise StopIteration("Skipping all rules...")
+
+        except StopIteration:
+            pass
+        print "Done!"
 
     def handle_rule_match(self, rule, line, index):
         #Takes a rule, prints match, etc. and gives options.
@@ -52,7 +63,7 @@ class file_parser:
         print "Subject:" + rule.get_subject()
         print "--OPTIONS--"
         #Due to action only being WARNING for now, this is static.
-        print "[E]dit line, [S]kip, More [I]nformation"
+        print "[E]dit, [I]gnore, [S]kip, Skip [A]ll, [M]ore, [H]elp"
         while True:
             try:
                 #print "--OPTIONS--"
@@ -62,20 +73,29 @@ class file_parser:
                 if response.lower() == 'e':
                     print "Editing file..."
                     #Edit file with index
-                    oldLine = line
                     self.edit_sentence(line, index)
-                    print "Edited! oldLine = " + oldLine
-                    print "New line = " + self.sentences[index]
-                    break
-                elif response.lower() == 's':
-                    print "Skipping..."
-                    #Skip to next line
+                    print "Edit complete!"
                     break
                 elif response.lower() == 'i':
+                    print "Ignored match. Finding next..."
+                    #Skip to next line
+                    break
+                elif response.lower() == "s":
+                    #Skip current rule
+                    return "skip"
+                    break
+                elif response.lower() == "a":
+                    #Skip entire prompt
+                    return "skip_all"
+                    break
+                elif response.lower() == 'm':
                     #Display more info
                     info = rule.get_info()
                     for contents in info:
                         print contents
+                elif response.lower() == 'h':
+                    #Display help module
+                    self.display_help()
                 else:
                     #Invalid input
                     print "Please enter a valid option."
@@ -85,6 +105,17 @@ class file_parser:
                 continue
 
         print "Completed rule application!"
+        return "default"
+
+    def display_help(self):
+        print "\n"
+        print "==HELP=="
+        print "[E]dit: Edit the sentence(s) displayed in a text editor"
+        print "[I]gnore: Ignore applying the current rule to the sentence displayed"
+        print "[S]kip: Skip the current rule and start applying next rule"
+        print "Skip [A]ll: Skip all future rules and start writing to file"
+        print "[M]ore Information: Display more information on the current rule"
+        print "[H]elp: Display the Help prompt"
 
     def preprocess_file(self):
         #read in file contents
@@ -146,7 +177,7 @@ class file_parser:
             subprocess.Popen([editor, self.SENTENCE_PATH]).wait()
             #When done, open and write new sentence to file
         except:
-            raise IOError("No editor found.")
+            raise IOError("No valid editor found.")
 
         #Attempt to open sentence file to read edited line
         file = self.open_file(self.SENTENCE_PATH, "r+")
