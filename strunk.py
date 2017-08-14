@@ -34,7 +34,7 @@ def strunk(progname, textfile, rulefile):
 
 if __name__ == '__main__':
     #Testing
-    args = ("strunk", "gatsby.txt", None)
+    args = ("strunk", "gatsby.txt", "demonstrate/demonstrate")
     strunk(*args)
     #if len(sys.argv) == 2:
     #    sys.argv.append(None)

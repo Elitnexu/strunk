@@ -3,6 +3,7 @@
 *.strunk
 .cache
 Strunk.egg-info/
+demonstrate/
 build/
 dist/
 tests/tests.txt
