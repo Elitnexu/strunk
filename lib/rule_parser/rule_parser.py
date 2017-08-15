@@ -1,14 +1,17 @@
+from __future__ import print_function
+from __future__ import absolute_import
 #Rule Parser handles the ruleset given, opening and extracting from the
 #ruleset file or command and placing all valid entries into a dictionary.
 #The dictionary is then used as a matcher when compared against the text file
 #input.
 #Rule Parser takes multiple rulesets? Extension? Consider leaving this
 #option open while designing interface
+from builtins import object
 import os.path
 import re
-import rule
+from . import rule
 
-class rule_parser:
+class rule_parser(object):
 
     def __init__(self, args):
         self.args = args
@@ -111,9 +114,9 @@ class rule_parser:
     def get_strunk_path(self):
         if self.args is None:
             #Check for config file
-            print "Default rule file specified."
+            print("Default rule file specified.")
             if os.path.isfile(self.DEFAULT_RULE_FILE):
-                print "Default rule file detected."
+                print("Default rule file detected.")
                 return self.DEFAULT_RULE_FILE
             else:
                 #Raise error? Create default?
@@ -122,10 +125,10 @@ class rule_parser:
         #Either custom ruleset or regex. Check ruleset first.
         else:
             #Check if custom ruleset exists
-            print "Custom ruleset specified."
+            print("Custom ruleset specified.")
             custom_ruleset = self.args + ".strunk"
             if os.path.isfile(custom_ruleset):
-                print "Custom ruleset file detected."
+                print("Custom ruleset file detected.")
                 return custom_ruleset
             else:
                 raise ValueError("No valid rules found. Check your syntax!")

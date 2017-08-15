@@ -1,4 +1,5 @@
-class rule:
+from builtins import object
+class rule(object):
 
     def __init__(self, expression):
         #Instance variables

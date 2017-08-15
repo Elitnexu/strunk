@@ -1,5 +1,7 @@
+from __future__ import print_function
 #Applies ruleset to text file. Abstracted behaviour out of
 #File_Parser.py
+from builtins import input
 import os
 import re
 import subprocess
@@ -29,8 +31,8 @@ def apply_ruleset(ruleset):
             #print "Senteces length: " + str(len(self.sentences))
             for index, line in enumerate(sentences):
                 if re.search(rule.get_expression(), line) is not None:
-                    print "\n"
-                    print "Match found for " + rule.get_expression() + " : " + line
+                    print("\n")
+                    print("Match found for " + rule.get_expression() + " : " + line)
                     #Print context, give options
                     action = handle_rule_match(sentences, rule, line, index)
                     if action == "skip": #Skip current rule
@@ -41,33 +43,33 @@ def apply_ruleset(ruleset):
 
     except StopIteration:
         pass
-    print "Done!"
+    print("Done!")
     return sentences
 
 def handle_rule_match(sentences, rule, line, index):
 
     SENTENCE_PATH = "temp.strunk"
     #Takes a rule, prints match, etc. and gives options.
-    print "Expression: " + rule.get_expression()
-    print "Action: " + rule.get_action()
-    print "Subject:" + rule.get_subject()
-    print "--OPTIONS--"
+    print("Expression: " + rule.get_expression())
+    print("Action: " + rule.get_action())
+    print("Subject:" + rule.get_subject())
+    print("--OPTIONS--")
     #Due to action only being WARNING for now, this is static.
-    print "[E]dit, [I]gnore, [S]kip, Skip [A]ll, [M]ore, [H]elp"
+    print("[E]dit, [I]gnore, [S]kip, Skip [A]ll, [M]ore, [H]elp")
     while True:
         try:
             #print "--OPTIONS--"
             #Due to action only being WARNING for now, this is static.
             #print "[E]dit line, [S]kip, More [I]nformation"
-            response = raw_input("Reply: ")
+            response = input("Reply: ")
             if response.lower() == 'e':
-                print "Editing file..."
+                print("Editing file...")
                 #Edit file with index
                 edit_sentence(sentences, SENTENCE_PATH, line, index)
-                print "Edit complete!"
+                print("Edit complete!")
                 break
             elif response.lower() == 'i':
-                print "Ignored match. Finding next..."
+                print("Ignored match. Finding next...")
                 #Skip to next line
                 break
             elif response.lower() == "s":
@@ -82,30 +84,30 @@ def handle_rule_match(sentences, rule, line, index):
                 #Display more info
                 info = rule.get_info()
                 for contents in info:
-                    print contents
+                    print(contents)
             elif response.lower() == 'h':
                 #Display help module
                 display_help()
             else:
                 #Invalid input
-                print "Please enter a valid option."
+                print("Please enter a valid option.")
                 continue
         except ValueError:
-            print "Please enter a valid option."
+            print("Please enter a valid option.")
             continue
 
-    print "Completed rule application!"
+    print("Completed rule application!")
     return "default"
 
 def display_help():
-    print "\n"
-    print "==HELP=="
-    print "[E]dit: Edit the sentence(s) displayed in a text editor"
-    print "[I]gnore: Ignore applying the current rule to the sentence displayed"
-    print "[S]kip: Skip the current rule and start applying next rule"
-    print "Skip [A]ll: Skip all future rules and start writing to file"
-    print "[M]ore Information: Display more information on the current rule"
-    print "[H]elp: Display the Help prompt"
+    print("\n")
+    print("==HELP==")
+    print("[E]dit: Edit the sentence(s) displayed in a text editor")
+    print("[I]gnore: Ignore applying the current rule to the sentence displayed")
+    print("[S]kip: Skip the current rule and start applying next rule")
+    print("Skip [A]ll: Skip all future rules and start writing to file")
+    print("[M]ore Information: Display more information on the current rule")
+    print("[H]elp: Display the Help prompt")
 
 def edit_sentence(sentences, filepath, line, index):
     #write temp file with sentence as only contents
@@ -120,7 +122,7 @@ def edit_sentence(sentences, filepath, line, index):
     try:
         editor = os.environ['EDITOR']
     except KeyError:
-        print "Default editor not found. Setting to 'vi'..."
+        print("Default editor not found. Setting to 'vi'...")
         editor = 'vi'
 
     #Attempt to open editor and wait until its closed to continue
@@ -150,7 +152,7 @@ def edit_sentence(sentences, filepath, line, index):
 def write_new_file(filepath):
 
     file = open_file("strunked_" + filepath, "w+")
-    print "Writing Strunked file to " + "strunked_" + filepath + "..."
+    print("Writing Strunked file to " + "strunked_" + filepath + "...")
     #TODO Change behaviour based on config file
     #Change to process all at once? Might fix the sentence fragmentation
     sentences = parser.get_sentences()
@@ -158,7 +160,7 @@ def write_new_file(filepath):
         file.write(line)
     file.close()
 
-    print "Done!"
+    print("Done!")
 
 def open_file(filepath, mode):
     #Take the filepath specified
