@@ -47,6 +47,8 @@ class file_parser(object):
         i = 0
         sentence = ""
 
+        #Strip guts into function
+        #Test THAT function instead!
         for line in self.file:
             #Remove leading/trailing whitespace and newlines
             line = line.strip()

@@ -61,7 +61,7 @@ def handle_rule_match(sentences, rule, line, index):
             #print "--OPTIONS--"
             #Due to action only being WARNING for now, this is static.
             #print "[E]dit line, [S]kip, More [I]nformation"
-            response = input("Reply: ")
+            response = eval(input("Reply: "))
             if response.lower() == 'e':
                 print("Editing file...")
                 #Edit file with index

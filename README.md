@@ -36,12 +36,12 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
-## Usage
-# Running
+# Usage
+## Running
 In the root directory of Strunk, enter `python strunk.py example.txt example.strunk`
 at the command line in order to run the ruleset file `example.strunk` on the text document `example.txt`.
 
-# Syntax
+## Syntax
 Strunk uses the custom file format `.strunk` to designate as the collection of
 regular expressions to apply to a document. `.strunk` files have the following syntax:
 
