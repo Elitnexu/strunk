@@ -1,4 +1,5 @@
 import unittest
+import file_setup
 import lib.file_parser.file_parser as file_parser
 #import os
 
@@ -25,8 +26,10 @@ class FileParserTest(unittest.TestCase):
         IOError, lambda: self.parser.open_file("test.file", "qwerty")
         )
 
-    def test_preprocess_file(self):
+    def test_process_line(self):
+        #Test each type of expected return
         pass
+
 
 
 if __name__ == '__main__':

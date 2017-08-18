@@ -59,7 +59,7 @@ class file_parser(object):
     def process_line(self, index, line, sentence, delim_exp):
         #Remove leading/trailing whitespace and newlines
         line = line.strip()
-        if line == '\n':
+        if line == '':
             self.sentences.append(line)
             return sentence
         if re.match(delim_exp, line) is not None:

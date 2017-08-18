@@ -1,4 +1,5 @@
 import unittest
+import tests.file_setup as file_setup
 import lib.rule_parser.rule_parser as rule_parser
 #import os
 
@@ -9,6 +10,8 @@ class RuleParserTest(unittest.TestCase):
     global testfile
     ruleset = rule_parser.rule_parser(None)
     #Replace with function that fills in data
+    data = file_setup.generate_strunk_data()
+    file_setup.setup_strunk_file("tests/tests.strunk", data)
     testfile = open("tests/tests.strunk", "r")
 
     def test_get_strunk_path(self):
