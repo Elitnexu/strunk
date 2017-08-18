@@ -46,7 +46,7 @@ class file_parser(object):
         #read in file contents
         i = 0
         sentence = ""
-
+        delim_exp = r'.+[!?.].*'
         #Strip guts into function
         #Test THAT function instead!
         for line in self.file:
@@ -55,9 +55,9 @@ class file_parser(object):
             if line == '':
                 self.sentences.append("\n")
                 continue
-            if re.match(r'.+[!?.].*', line) is not None:
+            if re.match(delim_exp, line) is not None:
                 #line = re.split('[!?.]', line)
-                line = re.findall(r'.+[!?.].*', line, re.DOTALL)
+                line = re.findall(delim_exp, line, re.DOTALL)
 
                 if i != 0:
                     #Append second half of sentence to previous sentence
