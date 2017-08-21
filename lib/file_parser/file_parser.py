@@ -46,7 +46,9 @@ class file_parser(object):
         #read in file contents
         #index = 0
         #sentence = ""
+        #ORIGINAL DELIM
         delim_exp = r'.+[!?.].*'
+        #delim_exp = r'.+[!?.].+'
 
         #For each line, apply processing to line and
         #add to sentence list
@@ -58,21 +60,23 @@ class file_parser(object):
 
     def process_line(self, delim_exp):
 
-        contents = ""
-        for line in self.file:
-            contents = contents + line
+        contents = self.file
+        for line in contents:
+            self.sentences.append(line)
 
-        match = re.match(delim_exp, contents)
-
-        if match:
+        #match = re.match(delim_exp, contents)
+        print("Length of sentences: " + str(len(self.sentences)))
+        #if match:
             #process
-            for w in re.findall(delim_exp, contents, re.DOTALL):
-                self.sentences.append(w)
+            #parsed = re.findall(delim_exp, contents, re.DOTALL)
+            #for w in parsed:
+                #self.sentences.append(w)
+            #print("Sentences length: " + str(len(self.sentences)))
+            #print(self.sentences)
 
-            print("Sentences length: " + str(len(self.sentences)))
-        else:
+        #else:
             #empty file
-            raise IOError("No data in text file!")
+            #raise IOError("No data in text file!")
 
 
     def process_line_old(self, index, line, sentence, delim_exp):

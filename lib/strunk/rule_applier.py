@@ -29,6 +29,8 @@ def apply_ruleset(ruleset):
             rule = ruleset[rule]
             #print "Expression: " + rule.get_expression()
             #print "Senteces length: " + str(len(self.sentences))
+
+
             for index, line in enumerate(sentences):
                 if re.search(rule.get_expression(), line) is not None:
                     print("\n")
