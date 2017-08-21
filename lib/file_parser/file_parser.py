@@ -44,19 +44,38 @@ class file_parser(object):
 
     def preprocess_file(self):
         #read in file contents
-        index = 0
-        sentence = ""
+        #index = 0
+        #sentence = ""
         delim_exp = r'.+[!?.].*'
 
         #For each line, apply processing to line and
         #add to sentence list
-        for line in self.file:
-            sentence = self.process_line(index, line, sentence, delim_exp)
-            index = index + 1
-
+        #for line in self.file:
+            #sentence = self.process_line(index, line, sentence, delim_exp)
+            #index = index + 1
+        self.process_line(delim_exp)
         return self.sentences
 
-    def process_line(self, index, line, sentence, delim_exp):
+    def process_line(self, delim_exp):
+
+        contents = ""
+        for line in self.file:
+            contents = contents + line
+
+        match = re.match(delim_exp, contents)
+
+        if match:
+            #process
+            for w in re.findall(delim_exp, contents, re.DOTALL):
+                self.sentences.append(w)
+
+            print("Sentences length: " + str(len(self.sentences)))
+        else:
+            #empty file
+            raise IOError("No data in text file!")
+
+
+    def process_line_old(self, index, line, sentence, delim_exp):
         #Remove leading/trailing whitespace and newlines
         line = line.strip()
         if line == '':
