@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 #Takes text and ruleset, outputs results to file
 import lib.rule_parser.rule_parser as rule_parser
-import lib.rule_parser.rule as rule
 import lib.file_parser.file_parser as file_parser
 import lib.strunk.rule_applier as rule_applier
-#import file_parser
+import lib.rule_parser.rule as rule
 import sys
 
 #Read in config file

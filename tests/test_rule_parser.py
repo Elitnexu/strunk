@@ -11,7 +11,7 @@ class RuleParserTest(unittest.TestCase):
     ruleset = rule_parser.rule_parser(None)
     #Replace with function that fills in data
     data = file_setup.generate_strunk_data()
-    file_setup.setup_strunk_file("tests/tests.strunk", data)
+    file_setup.setup_test_file("tests/tests.strunk", data)
     testfile = open("tests/tests.strunk", "r")
 
     def test_get_strunk_path(self):

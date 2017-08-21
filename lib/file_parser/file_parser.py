@@ -65,12 +65,12 @@ class file_parser(object):
         if re.match(delim_exp, line) is not None:
             #line = re.split('[!?.]', line)
             line = re.findall(delim_exp, line, re.DOTALL)
-
+            #comment
             if index != 0:
                 #Append second half of sentence to previous sentence
                 line[0] = sentence + "\n" + line[0]
             self.sentences.append(line[0])
-            #...why is this if branch in here again?
+            #After splitting into sentences, if more than one add in order
             if len(line) > 1:
                 #Process all sentences and append to list
                 for w in line:
@@ -81,6 +81,9 @@ class file_parser(object):
                         sentence = w
                     else:
                         self.sentences.append(w)
+                #From here, add sentence + new line
+                return sentence
+
         else: #full line, add to previous sentence
             #sentence += line
             sentence = sentence + "\n" + line
