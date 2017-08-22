@@ -18,18 +18,18 @@ class FileParserTest(unittest.TestCase):
     def test_open_file(self):
         #Valid mode given
         try:
-            file = parser.open_file("test.file", "w+")
+            file = self.parser.open_file("test.file", "w+")
             file.close()
         except Exception:
-            #self.fail("Function raised Exception unexpectedly!")
-            print("Function raised Exception unexpectedly!")
+            self.fail("Function raised Exception unexpectedly!")
+            #print("Function raised Exception unexpectedly!")
 
         #Invalid mode specified
         self.assertRaises(
         IOError, lambda: self.parser.open_file("test.file", "qwerty")
         )
 
-    def test_add_file_to_sentences(self):
+    def test_set_file_to_sentences(self):
         #Set file to some set of sentences
         #Run test case
         #Assert sentences returned equal to original file contents
@@ -39,7 +39,7 @@ class FileParserTest(unittest.TestCase):
         self.parser.set_file(test_contents)
 
         #File contents is read correctly into sentences list
-        self.parser.add_file_to_sentences()
+        self.parser.set_file_to_sentences()
         self.assertEqual("".join(self.parser.get_sentences()), test_contents)
 
 

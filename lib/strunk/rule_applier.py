@@ -6,7 +6,6 @@ import os
 import re
 import subprocess
 
-
 def rule_applier(ruleset, p_parser):
 
     global parser
@@ -63,7 +62,7 @@ def handle_rule_match(sentences, rule, line, index):
             if response.lower() == 'e':
                 print("Editing file...")
                 #Edit file with index
-                edit_sentence(sentences, SENTENCE_PATH, line, index)
+                edit_sentence(SENTENCE_PATH, line, index)
                 print("Edit complete!")
                 break
             elif response.lower() == 'i':
@@ -107,7 +106,7 @@ def display_help():
     print("[M]ore Information: Display more information on the current rule")
     print("[H]elp: Display the Help prompt")
 
-def edit_sentence(sentences, filepath, line, index):
+def edit_sentence(filepath, line, index):
     #write temp file with sentence as only contents
     #open with default editor
     #take file changes and save as new sentence index

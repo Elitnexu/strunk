@@ -44,7 +44,7 @@ class file_parser(object):
 
     #Takes all contents of current file and appends to sentences list
     #Returns the newly appended sentences list
-    def add_file_to_sentences(self):
+    def set_file_to_sentences(self):
 
         for line in self.get_file():
             self.sentences.append(line)
