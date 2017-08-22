@@ -29,7 +29,7 @@ class FileParserTest(unittest.TestCase):
         IOError, lambda: self.parser.open_file("test.file", "qwerty")
         )
 
-    def test_process_line(self):
+    def test_add_file_to_sentences(self):
         #Setup for process line
         #parser.set_file(testfile)
         index = 4

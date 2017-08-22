@@ -27,9 +27,6 @@ def apply_ruleset(ruleset):
         for rule in ruleset:
             #Making code more readable
             rule = ruleset[rule]
-            #print "Expression: " + rule.get_expression()
-            #print "Senteces length: " + str(len(self.sentences))
-
 
             for index, line in enumerate(sentences):
                 if re.search(rule.get_expression(), line) is not None:
@@ -43,6 +40,8 @@ def apply_ruleset(ruleset):
                     if action == "skip_all": #Skip all rules
                         raise StopIteration("Skipping all rules...")
 
+    #This exception is deliberately invoked when skipping all rules,
+    #to prematurely end processing
     except StopIteration:
         pass
     print("Done!")
@@ -60,9 +59,6 @@ def handle_rule_match(sentences, rule, line, index):
     print("[E]dit, [I]gnore, [S]kip, Skip [A]ll, [M]ore, [H]elp")
     while True:
         try:
-            #print "--OPTIONS--"
-            #Due to action only being WARNING for now, this is static.
-            #print "[E]dit line, [S]kip, More [I]nformation"
             response = (input("Reply: "))
             if response.lower() == 'e':
                 print("Editing file...")
@@ -139,11 +135,6 @@ def edit_sentence(sentences, filepath, line, index):
 
     #Read contents, delete contents when done
     lines = file.read()
-
-    #for line in lines:
-    #Go by above later, mite b. cool
-    #TEST IF THIS FIXES EDItiNG
-    #line = line.strip()
     parser.set_sentence(index, lines)
     #sentences[index] = line
     file.truncate(0)
@@ -167,7 +158,6 @@ def write_new_file(filepath):
 def open_file(filepath, mode):
     #Take the filepath specified
     #Attempt to open
-    #If works, we ready for main show
     try:
         return open(filepath, mode)
     except:

@@ -26,7 +26,7 @@ def strunk(progname, textfile, rulefile):
     parser.set_ruleset(rules)
 
     parser.set_file(parser.open_file(parser.filepath, "r"))
-    parser.preprocess_file()
+    parser.add_file_to_sentences()
 
     rule_applier.rule_applier(rules, parser)
     #TODO Abstract this out
