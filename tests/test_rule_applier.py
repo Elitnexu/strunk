@@ -3,7 +3,7 @@ import file_setup
 import lib.file_parser.file_parser as file_parser
 #import os
 
-class FileParserTest(unittest.TestCase):
+class RuleApplierTest(unittest.TestCase):
     #Setup and destroy
     #>>whatever values required
     #global ruleset
@@ -29,18 +29,8 @@ class FileParserTest(unittest.TestCase):
         IOError, lambda: self.parser.open_file("test.file", "qwerty")
         )
 
-    def test_add_file_to_sentences(self):
-        #Set file to some set of sentences
-        #Run test case
-        #Assert sentences returned equal to original file contents
-        test_contents = "This is a test sentence.\n" \
-                        + "It will have three lines!\n" \
-                        + "This is the third? I'd say so."
-        self.parser.set_file(test_contents)
+    def test_another_test(self):
 
-        #File contents is read correctly into sentences list
-        self.parser.add_file_to_sentences()
-        self.assertEqual("".join(self.parser.get_sentences()), test_contents)
 
 
 if __name__ == '__main__':

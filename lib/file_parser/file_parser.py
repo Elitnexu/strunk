@@ -48,7 +48,6 @@ class file_parser(object):
 
         for line in self.get_file():
             self.sentences.append(line)
-        return self.get_sentences()
 
     #Set ruleset dictionary
     def set_ruleset(self, ruleset):
