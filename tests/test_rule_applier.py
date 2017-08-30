@@ -26,6 +26,20 @@ class RuleApplierTest(unittest.TestCase):
 
     applier = rule_applier.rule_applier(rules, parser)
 
+    def test_open_file(self):
+        #Valid mode given
+        try:
+            file = self.applier.open_file("test.file", "w+")
+            file.close()
+        except Exception:
+            self.fail("Function raised Exception unexpectedly!")
+            #print("Function raised Exception unexpectedly!")
+
+        #Invalid mode specified
+        self.assertRaises(
+            IOError, lambda: self.applier.open_file("test.file", "qwerty")
+        )
+
     def test_apply_ruleset(self):
         pass
 
@@ -36,11 +50,33 @@ class RuleApplierTest(unittest.TestCase):
         pass
 
     def test_write_new_file(self):
-        
-        #Write a file with method
-        #Check if contents of file = sentences
-        #rule_applier.write_new_file()
-        #rule_applier.write_new_file(parser.get_file_path())
+        self.parser.set_file(self.parser.open_file("tests/test.txt", "r"))
+        self.parser.set_file_to_sentences()
+        self.parser.set_file_path("test.txt")
+        #Applier's parser now has sentences from test.txt in it?
+
+        try:
+            self.applier.write_new_file(self.parser.get_file_path())
+        except Exception:
+            self.fail("Applier failed to write new file!")
+
+        #Open newly Strunked text file
+        file = ""
+        try:
+            file = self.parser.open_file("strunked_test.txt", "r")
+        except Exception:
+            self.fail("Strunked Text File failed to open!")
+
+        test_sentences = self.parser.get_sentences()
+        self.parser.set_file(file)
+        self.parser.set_file_to_sentences()
+
+        #Strunked File should equal pre-write file
+        self.assertEqual(test_sentences, self.parser.get_sentences())
+
+
+    def test_apply(self):
+        #applier.apply()
         pass
 
 if __name__ == '__main__':
