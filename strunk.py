@@ -28,7 +28,8 @@ def strunk(progname, textfile, rulefile):
     parser.set_file(parser.open_file(parser.filepath, "r"))
     parser.set_file_to_sentences()
 
-    rule_applier.rule_applier(rules, parser)
+    applier = rule_applier.rule_applier(rules, parser)
+    applier.apply()
     #TODO Abstract this out
     #TODO Write edited rules to file, check that editor actually writes changes
 

@@ -9,6 +9,5 @@ build/
 dist/
 tests/tests.txt
 tests.txt
-test.file
 *.txt
 .coverage
