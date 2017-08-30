@@ -1,0 +1,22 @@
+#Default file for Strunk.
+\bGatsby\b
+WARNING
+This is a subject line#1
+This is an info line#1
+This is a more info line#1
+
+
+\bNick\b
+WARNING
+This is a subject line#2
+This is an info line#2
+This is a more info line#2
+This is another more info line#2
+
+
+\bpod racing\b
+WARNING
+This is a subject line#3
+This is an info line#3
+
+END

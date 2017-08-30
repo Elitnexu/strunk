@@ -1,0 +1,10 @@
+#Preset use cases for brand matching
+#TM, etc.
+BRAND X(?!\u2122)
+WARNING
+BRAND X is missing the TM (unicode 2122) symbol
+Replace BRAND X with your brand name.
+This rule is useful for brand protection by ensuring
+TM usage on all product mentions.
+
+END

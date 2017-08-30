@@ -1,7 +1,5 @@
 *.pyc
 *.bak
-.strunk
-*.strunk
 .cache
 Strunk.egg-info/
 demonstrate/

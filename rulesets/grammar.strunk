@@ -1,0 +1,18 @@
+#Preset use cases for grammar correction
+#they're their there, etc.
+utilise.*
+WARNING
+Unnecessary; replace with 'use'
+There is no functional difference between 'use' and 'utilise'
+It is harder to understand 'utilise', is longer and has no
+additional meaning.
+
+
+(?i)\bthey're\b|(?i)\bthere\b|(?i)\btheir\b
+WARNING
+Possible misuse of type, see info
+Use 'They're' when x
+Use 'There' when y
+Use 'Their' when z
+
+END
