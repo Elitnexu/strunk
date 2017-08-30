@@ -40,15 +40,6 @@ class RuleApplierTest(unittest.TestCase):
             IOError, lambda: self.applier.open_file("test.file", "qwerty")
         )
 
-    def test_apply_ruleset(self):
-        pass
-
-    def test_handle_rule_match(self):
-        pass
-
-    def test_edit_sentence(self):
-        pass
-
     def test_write_new_file(self):
         self.parser.set_file(self.parser.open_file("tests/test.txt", "r"))
         self.parser.set_file_to_sentences()
@@ -73,11 +64,6 @@ class RuleApplierTest(unittest.TestCase):
 
         #Strunked File should equal pre-write file
         self.assertEqual(test_sentences, self.parser.get_sentences())
-
-
-    def test_apply(self):
-        #applier.apply()
-        pass
 
 if __name__ == '__main__':
     unittest.main()
