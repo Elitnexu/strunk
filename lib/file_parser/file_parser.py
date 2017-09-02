@@ -24,6 +24,7 @@ class file_parser(object):
         #Attempt to open
         #If works, we ready for main show
         try:
+            print(filepath)
             return open(filepath, mode)
         except:
             raise IOError("Text file at " + filepath

@@ -35,12 +35,13 @@ def strunk(progname, textfile, rulefile):
 
 if __name__ == '__main__':
     #Testing
-    args = ("strunk", "gatsby.txt", "demonstrate/demonstrate")
-    strunk(*args)
-    #if len(sys.argv) == 2:
-    #    sys.argv.append(None)
-    #    strunk(*sys.argv)
-    #elif len(sys.argv) == 3:
-    #    strunk(*sys.argv)
-    #else:
-    #    raise ValueError("Invalid argument syntax. Check usage for info.")
+    #args = ("strunk", "gatsby.txt", "")
+    #strunk(*args)
+    if len(sys.argv) == 2:
+        sys.argv.append(None)  
+    elif len(sys.argv) == 3:
+        pass
+    else:
+        raise ValueError("Invalid argument syntax. Check usage for info.")
+		
+    strunk(*sys.argv)

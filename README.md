@@ -20,25 +20,12 @@ TODO
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Install the dependencies by running `pip install -r requirements.txt` in the root directory
+of the project.
 
 # Usage
 ## Running
-In the root directory of Strunk, enter `python strunk.py example.txt example.strunk`
+In the root directory of Strunk, enter `python3 strunk.py example.txt example.strunk`
 at the command line in order to run the ruleset file `example.strunk` on the text document `example.txt`.
 
 ## Syntax
