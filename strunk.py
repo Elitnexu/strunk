@@ -30,8 +30,6 @@ def strunk(progname, textfile, rulefile):
 
     applier = rule_applier.rule_applier(rules, parser)
     applier.apply()
-    #TODO Abstract this out
-    #TODO Write edited rules to file, check that editor actually writes changes
 
 if __name__ == '__main__':
     #Testing

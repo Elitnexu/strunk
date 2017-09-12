@@ -8,3 +8,6 @@ dist/
 tests/tests.txt
 tests.txt
 .coverage
+test.file
+*gatsby.txt
+*test.txt
