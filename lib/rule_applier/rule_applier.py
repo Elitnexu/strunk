@@ -6,6 +6,8 @@ import os
 import re
 import subprocess
 
+#Main class for applying rules to text files, asking for input
+#when matchs are found and saving to file.
 class rule_applier(object):
 
     def __init__(self, ruleset, parser):

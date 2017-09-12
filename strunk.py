@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #==Strunk==
 #Author: Marc Hanley
-#Commenced: 25/07/2017
+#Commenced: 27/07/2017
 #Last modified: 12/09/2017
 #
 #Description:

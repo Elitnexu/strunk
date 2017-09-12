@@ -1,11 +1,9 @@
-#File Parser handles the text file side of strunk, opening and
-#processing text files based on the ruleset given to it.
-
 from builtins import object
 import re
 import subprocess
 import os
 
+#File Parser handles text file importing
 class file_parser(object):
 
     def __init__(self, filepath):
@@ -20,9 +18,6 @@ class file_parser(object):
         self.sentences = []
 
     def open_file(self, filepath, mode):
-        #Take the filepath specified
-        #Attempt to open
-        #If works, we ready for main show
         try:
             print(filepath)
             return open(filepath, mode)

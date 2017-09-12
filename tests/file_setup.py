@@ -1,9 +1,12 @@
+#File Setup.py
+#Sets up all test data and files, rather than keeping them in the directory.
 def setup_test_file(filepath, data):
     f = open(filepath, "w+")
     for line in data:
         f.write(line)
     f.close()
 
+#Generate test text file data
 def generate_file_data():
     return "Media Sociale utilised the green light. Daisy, his long-forlorned lover, represented the American Dream.\n" \
     + "\n"
@@ -17,6 +20,7 @@ def generate_file_data():
     + "\n" \
     + "Unfortunately, the enigmatic Gatsby meets his maker and Nick is left to pick up the pieces! The end?"
 
+#Generate test strunkfile data
 def generate_strunk_data():
         return "#=DO NOT REMOVE FROM TEST DIRECTORY= " \
         + "#Test file for Strunk.\n" \
