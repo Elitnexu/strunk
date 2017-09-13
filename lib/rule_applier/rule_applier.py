@@ -1,6 +1,4 @@
 from __future__ import print_function
-#Applies ruleset to text file. Abstracted behaviour out of
-#File_Parser.py
 from builtins import input
 import os
 import re

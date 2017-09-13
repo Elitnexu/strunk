@@ -1,9 +1,9 @@
 import unittest
 import file_setup
+import os
 import lib.file_parser.file_parser as file_parser
 import lib.rule_parser.rule_parser as rule_parser
 import lib.rule_applier.rule_applier as rule_applier
-import os
 
 class RuleApplierTest(unittest.TestCase):
     #Setup and destroy
@@ -33,12 +33,13 @@ class RuleApplierTest(unittest.TestCase):
             file.close()
         except Exception:
             self.fail("Function raised Exception unexpectedly!")
-            #print("Function raised Exception unexpectedly!")
 
         #Invalid mode specified
         self.assertRaises(
             IOError, lambda: self.applier.open_file("test.file", "qwerty")
         )
+        #TODO: Add shutdown hook for this in filesetup destroy
+        os.remove("test.file")
 
     def test_write_new_file(self):
         self.parser.set_file(self.parser.open_file("tests/test.txt", "r"))

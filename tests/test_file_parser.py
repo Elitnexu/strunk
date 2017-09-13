@@ -1,4 +1,5 @@
 import unittest
+import os
 import file_setup
 import lib.file_parser.file_parser as file_parser
 #import os
@@ -16,18 +17,21 @@ class FileParserTest(unittest.TestCase):
     #testfile = open("tests/tests.strunk", "r")
 
     def test_open_file(self):
+
         #Valid mode given
         try:
             file = self.parser.open_file("test.file", "w+")
+            file.truncate(0)
             file.close()
         except Exception:
             self.fail("Function raised Exception unexpectedly!")
-            #print("Function raised Exception unexpectedly!")
 
         #Invalid mode specified
         self.assertRaises(
         IOError, lambda: self.parser.open_file("test.file", "qwerty")
         )
+        #Cleanup
+        os.remove("test.file")
 
     def test_set_file_to_sentences(self):
         #Set file to some set of sentences
@@ -41,7 +45,6 @@ class FileParserTest(unittest.TestCase):
         #File contents is read correctly into sentences list
         self.parser.set_file_to_sentences()
         self.assertEqual("".join(self.parser.get_sentences()), test_contents)
-
 
 if __name__ == '__main__':
     unittest.main()
