@@ -42,22 +42,26 @@ ACTION
 END
 ```
 
-
+### Comments
 Comments are denoted with `#` as the first character of a given line. Every comment
 line must _start_ with `#` to be considered a comment, i.e "ACTION \#some action" is
 invalid.
 
+### Regular Expression
 The Regular Expression line contains the regular expression Strunk will evaluate.
 
+### Action
 The Action line contains the specified action for Strunk to perform. As of the
 latest commit, this feature is unimplemented and defaults to the 'WARNING' action.
 
+### Subject
 The Subject line should contain a single, concise sentence that specifies why a match
 is made for the given expression. For instance, an appropriate subject line for the
 expression `\butilise*\b` is "Unnecessary: replace with 'use'". The goal of the subject
 line is to inform the user at a glance, and so should not exceed 72 characters if
 possible.
 
+### Information
 The Information lines are displayed when a match is made by Strunk and a user asks
 for more information, at which point these lines are displayed. These lines are
 optional and can fill as many rows as desired.
@@ -65,6 +69,7 @@ optional and can fill as many rows as desired.
 Between each rule, include two spaces in order to delineate the end of the previous
 rules' "More Information" lines.
 
+### END
 The final line of a Strunk file should be "END". Any lines after this are ignored.
 
 ## Testing
