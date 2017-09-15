@@ -10,17 +10,22 @@ matching sentence in the text and save any changes made.
 Strunk is named after [William Strunk](https://en.wikipedia.org/wiki/William_Strunk_Jr.),
 author of [The Elements of Style](https://en.wikipedia.org/wiki/The_Elements_of_Style).
 
-## Installing
+# Usage
 
+## Installing
 Install the dependencies by running `pip install -r requirements.txt` in the root directory
 of the project.
 
-# Usage
 ## Running
 In the root directory of Strunk, enter `python3 strunk.py example.txt example.strunk`
 at the command line in order to run the ruleset file `example.strunk` on the text document `example.txt`.
 
-## Syntax
+## Testing
+Tests are all included in the `tests` directory. To run them, use the command
+`py.test --cov strunk/` in the root directory.
+
+# Syntax
+
 Strunk uses the custom file format `.strunk` to designate as the collection of
 regular expressions to apply to a document. `.strunk` files have the following syntax:
 
@@ -71,8 +76,3 @@ rules' "More Information" lines.
 
 ### END
 The final line of a Strunk file should be "END". Any lines after this are ignored.
-
-## Testing
-
-Tests are all included in the `tests` directory. To run them, use the command
-`py.test --cov strunk/` in the root directory.
