@@ -30,7 +30,7 @@ Strunk uses the custom file format `.strunk` to designate as the collection of
 regular expressions to apply to a document. `.strunk` files have the following syntax:
 
 ```
-\#COMMENT  
+#COMMENT  
 REGULAR EXPRESSION  
 ACTION    
 SUBJECT  
