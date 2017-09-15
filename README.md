@@ -32,7 +32,7 @@ at the command line in order to run the ruleset file `example.strunk` on the tex
 Strunk uses the custom file format `.strunk` to designate as the collection of
 regular expressions to apply to a document. `.strunk` files have the following syntax:
 
-\#COMMENT  
+`\#COMMENT  
 REGULAR EXPRESSION  
 ACTION    
 SUBJECT  
@@ -46,7 +46,7 @@ ACTION
 ...  
 ...  
 ...  
-END  
+END`
 
 
 A template file is included in the root directory under `template.strunk` as a
@@ -78,4 +78,5 @@ The final line of a Strunk file should be "END". Any lines after this are ignore
 
 ## Testing
 
-Explain how to run the automated tests for this system
+Tests are all included in the `tests` directory. To run them, use the command
+`py.test --cov strunk/` in the root directory.
