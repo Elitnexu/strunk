@@ -1,7 +1,7 @@
 import unittest
 import os
 import file_setup
-import lib.file_parser.file_parser as file_parser
+import strunk.file_parser.file_parser as file_parser
 #import os
 
 class FileParserTest(unittest.TestCase):

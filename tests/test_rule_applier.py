@@ -1,9 +1,9 @@
 import os
 import unittest
 import tests.file_setup as file_setup
-import lib.file_parser.file_parser as file_parser
-import lib.rule_parser.rule_parser as rule_parser
-import lib.rule_applier.rule_applier as rule_applier
+import strunk.file_parser.file_parser as file_parser
+import strunk.rule_parser.rule_parser as rule_parser
+import strunk.rule_applier.rule_applier as rule_applier
 
 class RuleApplierTest(unittest.TestCase):
     #Setup and destroy
@@ -20,7 +20,7 @@ class RuleApplierTest(unittest.TestCase):
     data = file_setup.generate_strunk_data()
     file_setup.setup_test_file("tests/tests.strunk", data)
     #TODO Come back here when fixing rule parser get strunk path
-    ruleset.args = "tests/tests"
+    ruleset.args = "tests/tests.strunk"
     ruleset.import_ruleset()
     rules = ruleset.get_ruleset()
 

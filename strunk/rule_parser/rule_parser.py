@@ -128,8 +128,7 @@ class rule_parser(object):
                 print("Custom ruleset file detected.")
                 return custom_ruleset
             else:
-                print("No valid rules found. Check your syntax!")
-                sys.exit()
+                raise ValueError("No valid rules found. Check your syntax!")
 
     #Sets ruleset to imported file
     def import_ruleset(self):

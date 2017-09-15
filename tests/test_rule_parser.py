@@ -1,6 +1,6 @@
 import unittest
 import tests.file_setup as file_setup
-import lib.rule_parser.rule_parser as rule_parser
+import strunk.rule_parser.rule_parser as rule_parser
 #import os
 
 class RuleParserTest(unittest.TestCase):
@@ -22,27 +22,27 @@ class RuleParserTest(unittest.TestCase):
         )
 
         #Argument is custom filename
-        ruleset.args = "tests/tests"
+        ruleset.args = "tests/tests.strunk"
         self.assertEqual(
         ruleset.get_strunk_path(), "tests/tests.strunk"
         )
 
         #Argument is invalid file
-        ruleset.args = "tests/noexist"
+        ruleset.args = "tests/noexist.strunk"
         self.assertRaises(
         ValueError, lambda: ruleset.get_strunk_path()
         )
 
     def test_process_ruleset(self):
         #Preparation for tests
-        ruleset.args = "tests/tests"
+        ruleset.args = "tests/tests.strunk"
         filepath = ruleset.get_strunk_path()
 
         #Ruleset is parsed successfully
         ruleset.process_ruleset(filepath)
 
         #Ruleset syntax is invalid
-        ruleset.args = "tests/failed_test"
+        ruleset.args = "tests/failed_test.strunk"
         filepath = ruleset.get_strunk_path()
 
         self.assertRaises(
