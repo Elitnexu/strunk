@@ -10,15 +10,7 @@ matching sentence in the text and save any changes made.
 Strunk is named after [William Strunk](https://en.wikipedia.org/wiki/William_Strunk_Jr.),
 author of [The Elements of Style](https://en.wikipedia.org/wiki/The_Elements_of_Style).
 
-## Getting Started
-
-TODO
-
-### Prerequisites
-
-TODO
-
-### Installing
+## Installing
 
 Install the dependencies by running `pip install -r requirements.txt` in the root directory
 of the project.
@@ -32,7 +24,8 @@ at the command line in order to run the ruleset file `example.strunk` on the tex
 Strunk uses the custom file format `.strunk` to designate as the collection of
 regular expressions to apply to a document. `.strunk` files have the following syntax:
 
-`\#COMMENT  
+```
+\#COMMENT  
 REGULAR EXPRESSION  
 ACTION    
 SUBJECT  
@@ -46,11 +39,9 @@ ACTION
 ...  
 ...  
 ...  
-END`
+END
+```
 
-
-A template file is included in the root directory under `template.strunk` as a
-guide.
 
 Comments are denoted with `#` as the first character of a given line. Every comment
 line must _start_ with `#` to be considered a comment, i.e "ACTION \#some action" is
