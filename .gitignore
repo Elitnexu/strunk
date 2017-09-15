@@ -2,7 +2,6 @@
 *.bak
 .cache
 Strunk.egg-info/
-demonstrate/
 build/
 dist/
 .coverage

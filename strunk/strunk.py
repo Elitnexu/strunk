@@ -11,9 +11,9 @@
 #the rule.
 #Refer to the README for more detailed information.
 import sys
-import lib.rule_parser.rule_parser as rule_parser
-import lib.file_parser.file_parser as file_parser
-import lib.rule_applier.rule_applier as rule_applier
+import rule_parser.rule_parser as rule_parser
+import file_parser.file_parser as file_parser
+import rule_applier.rule_applier as rule_applier
 
 #Main program function
 def strunk(progname, textfile, rulefile):

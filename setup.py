@@ -5,4 +5,4 @@ setup(name='Strunk',
     description='Command-line tool for validating text files with regular expressions',
     author='Marc Hanley',
     author_email='marcjameshanley@gmail.com',
-    packages=[''])
+    packages=['lib'])
