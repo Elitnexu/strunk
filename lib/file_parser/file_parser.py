@@ -1,6 +1,6 @@
 from builtins import object
 
-#File Parser handles text file importing
+#File Parser handles text file importing.
 class file_parser(object):
 
     def __init__(self, filepath):

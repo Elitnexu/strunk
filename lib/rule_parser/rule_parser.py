@@ -108,9 +108,8 @@ class rule_parser(object):
             raise SyntaxError("Rule file ended unexpectedly. Check .strunk file syntax.")
 
     #Finds the appropriate response to the type of input expected
-    #i.e. given rule, ruleset file, etc. and outputs either a filepath
-    #or a TODO Rewrite whatever this function thinks its doing
-    #@return string containing a filepath or regex
+    #i.e. given rule, ruleset file, etc. and outputs a filepath
+    #@return string containing a filepath
     def get_strunk_path(self):
         if self.args is None:
             #Check for default file
