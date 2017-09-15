@@ -5,8 +5,6 @@ Strunk.egg-info/
 demonstrate/
 build/
 dist/
-tests/tests.txt
-tests.txt
 .coverage
 test.file
 *gatsby.txt
