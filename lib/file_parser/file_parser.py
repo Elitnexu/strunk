@@ -1,7 +1,4 @@
 from builtins import object
-import re
-import subprocess
-import os
 
 #File Parser handles text file importing
 class file_parser(object):
@@ -19,7 +16,6 @@ class file_parser(object):
 
     def open_file(self, filepath, mode):
         try:
-            print(filepath)
             return open(filepath, mode)
         except:
             raise IOError("Text file at " + filepath

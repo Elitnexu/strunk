@@ -1,6 +1,6 @@
-import unittest
-import file_setup
 import os
+import unittest
+import tests.file_setup as file_setup
 import lib.file_parser.file_parser as file_parser
 import lib.rule_parser.rule_parser as rule_parser
 import lib.rule_applier.rule_applier as rule_applier

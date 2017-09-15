@@ -13,6 +13,11 @@ class rule_applier(object):
         self.ruleset = ruleset
         self.parser = parser
         self.sentences = parser.get_sentences()
+        self.SKIP = 's'
+        self.SKIP_ALL = 'a'
+        self.MORE = 'm'
+        self.IGNORE = 'i'
+        self.HELP = 'h'
 
     def apply(self):
         self.apply_ruleset(self.ruleset)
@@ -34,7 +39,7 @@ class rule_applier(object):
                         print("\n")
                         print("Match found for " + rule.get_expression() + " : " + line)
                         #Print context, give options
-                        action = self.handle_rule_match(self.sentences, rule, line, index)
+                        action = self.handle_rule_match(rule, line, index)
                         if action == "skip": #Skip current rule
                             action = "default"
                             break
@@ -49,7 +54,7 @@ class rule_applier(object):
         print("Done!")
         return self.sentences
 
-    def handle_rule_match(self, sentences, rule, line, index):
+    def handle_rule_match(self, rule, line, index):
 
         SENTENCE_PATH = "temp.strunk"
         #Takes a rule, prints match, etc. and gives options.
@@ -68,24 +73,22 @@ class rule_applier(object):
                     self.edit_sentence(SENTENCE_PATH, line, index)
                     print("Edit complete!")
                     break
-                elif response.lower() == 'i':
+                elif response.lower() == self.IGNORE:
                     print("Ignored match. Finding next...")
                     #Skip to next line
                     break
-                elif response.lower() == "s":
+                elif response.lower() == self.SKIP:
                     #Skip current rule
                     return "skip"
-                    break
-                elif response.lower() == "a":
+                elif response.lower() == self.SKIP_ALL:
                     #Skip entire prompt
                     return "skip_all"
-                    break
-                elif response.lower() == 'm':
+                elif response.lower() == self.MORE:
                     #Display more info
                     info = rule.get_info()
                     for contents in info:
                         print(contents)
-                elif response.lower() == 'h':
+                elif response.lower() == self.HELP:
                     #Display help module
                     self.display_help()
                 else:

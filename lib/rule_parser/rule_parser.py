@@ -7,8 +7,8 @@ from __future__ import absolute_import
 #Rule Parser takes multiple rulesets? Extension? Consider leaving this
 #option open while designing interface
 from builtins import object
+import sys
 import os.path
-import re
 from . import rule
 
 class rule_parser(object):
@@ -39,7 +39,7 @@ class rule_parser(object):
         #Open file
         file = self.open_file(filepath, "r")
 
-        empty = "".strip()
+        "".strip()
         next_expected = "EXP"
         rules = {}
         new_rule = None
@@ -113,16 +113,17 @@ class rule_parser(object):
     #@return string containing a filepath or regex
     def get_strunk_path(self):
         if self.args is None:
-            #Check for config file
+            #Check for default file
             print("Default rule file specified.")
             if os.path.isfile(self.DEFAULT_RULE_FILE):
                 print("Default rule file detected.")
                 return self.DEFAULT_RULE_FILE
             else:
                 #Raise error? Create default?
-                raise IOError("Default rule file " + self.DEFAULT_RULE_FILE + " not found")
+                print("Default rule file " + self.DEFAULT_RULE_FILE + " not found")
+                sys.exit()
 
-        #Either custom ruleset or regex. Check ruleset first.
+        #Either custom ruleset or syntax error. Check ruleset first.
         else:
             #Check if custom ruleset exists
             print("Custom ruleset specified.")
@@ -131,7 +132,8 @@ class rule_parser(object):
                 print("Custom ruleset file detected.")
                 return custom_ruleset
             else:
-                raise ValueError("No valid rules found. Check your syntax!")
+                print("No valid rules found. Check your syntax!")
+                sys.exit()
 
     #Sets ruleset to imported file
     def import_ruleset(self):
