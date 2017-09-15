@@ -18,7 +18,6 @@ class rule_parser(object):
         #Instance variables
         self.DEFAULT_RULE_FILE = ".strunk"
         self.ruleset = None
-        #self.NEXT_EXPECTED_TYPE = {'EXP', 'ACT', 'SUB', 'INFO'}
 
     #Get the ruleset from this event, returns None if unassigned
     #@return The ruleset currently assigned to the parser
@@ -39,7 +38,6 @@ class rule_parser(object):
         #Open file
         file = self.open_file(filepath, "r")
 
-        "".strip()
         next_expected = "EXP"
         rules = {}
         new_rule = None
@@ -51,11 +49,9 @@ class rule_parser(object):
             ended = False
             #Remove leading/trailing whitespace and newlines
             line = line.strip()
-            #print next_expected
-            #print line
 
             #rules.append(new_rule)
-            if line == "END": #EOF, deal with better TODO
+            if line == "END": #EOF, cleanup and continue
                 rules[exp_key] = new_rule
                 new_rule = None
                 next_expected = "EXP"
@@ -83,7 +79,7 @@ class rule_parser(object):
                 continue
             #Handle information
             if next_expected == "INFO":
-                #Reached the end of info, next rule, fix if statements
+                #Check if reached the end of INFO lines
                 if spaces == 1 and line == "":
                     rules[exp_key] = new_rule
                     new_rule = None
@@ -126,7 +122,8 @@ class rule_parser(object):
         else:
             #Check if custom ruleset exists
             print("Custom ruleset specified.")
-            custom_ruleset = self.args + ".strunk"
+            custom_ruleset = self.args
+            print(custom_ruleset)
             if os.path.isfile(custom_ruleset):
                 print("Custom ruleset file detected.")
                 return custom_ruleset
