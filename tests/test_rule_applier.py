@@ -9,9 +9,7 @@ import strunk.rule_applier.rule_applier as rule_applier
 
 class RuleApplierTest(unittest.TestCase):
     #Setup and destroy
-    #>>whatever values required
-    #global ruleset
-    #global testfile
+
     parser = file_parser.file_parser("tests/test.txt")
     data = file_setup.generate_file_data()
     file_setup.setup_test_file("tests/test.txt", data)
@@ -77,6 +75,7 @@ class RuleApplierTest(unittest.TestCase):
         with patch.dict(os.environ, {'EDITOR' : 'vi'}):
             with patch.object(self.applier, 'open_editor', lambda x,y: None):
                 self.applier.edit_sentence('temp.strunk', 'this is a test', 0)
+                #Change contents to updated sentences, assert whether update worked
                 contents = self.applier.parser.get_sentences()
                 self.assertEqual(contents[0], 'this is a test')
 
@@ -94,13 +93,33 @@ class RuleApplierTest(unittest.TestCase):
         #Check Skip All is called
         with patch.object(self.applier, 'get_input', lambda x: 'a'):
             self.assertEqual(self.applier.handle_rule_match(rule, "test", 0), 'skip_all')
-        
+
         #Check Edit is called
         with patch.object(self.applier, 'get_input', lambda x: 'e'):
             with patch.object(self.applier, 'edit_sentence', lambda x,y,z: None):
                 self.assertEqual(self.applier.handle_rule_match(rule, "test", 0), 'default')
-    
-    
+        
+    def test_apply_ruleset(self):
+        #Setup ruleset appropriately
+        #Patch the call to handle rule match
+        #Assert each outcome
+        with patch.object(self.applier, 'handle_rule_match', lambda x,y,z: 'skip'):
+            self.assertEquals(self.applier.apply_ruleset(self.rules), None)
+
+        with patch.object(self.applier, 'handle_rule_match', lambda x,y,z: 'skip_all'):
+            self.assertRaises(StopIteration, self.applier.apply_ruleset(self.rules))
+
+    def test_display_help(self):
+        contents = "\n".join([
+        "==HELP==\n",
+        "[E]dit: Edit the sentence(s) displayed in a text editor\n",
+        "[I]gnore: Ignore applying the current rule to the sentence displayed\n",
+        "[S]kip: Skip the current rule and start applying next rule\n",
+        "Skip [A]ll: Skip all future rules and start writing to file\n",
+        "[M]ore Information: Display more information on the current rule\n",
+        "[H]elp: Display the Help prompt"])
+
+        self.assertEquals(self.applier.display_help(), contents)
 
 if __name__ == '__main__':
     unittest.main()

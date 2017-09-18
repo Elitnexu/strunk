@@ -8,15 +8,15 @@ def setup_test_file(filepath, data):
 
 #Generate test text file data
 def generate_file_data():
-    return "Media Sociale utilised the green light. Daisy, his long-forlorned lover, represented the American Dream.\n" \
-    + "\n"
-    + "Gatsby and Nick also had a very special relationship. In fact, Nick is considered an \"unreliable\n" \
-    + "narrator\n\", a result borne from Gatsby and Nick's interactions.\n" \
-    + "Media Sociale is a trademarked company\n!" \
+    return "Gatsby utilised the green light. Daisy, his long-forlorned lover, represented the American Dream.\n" \
+    + "\n" \
+    + "Gatsby and Nick also had a very special relationship. In fact, Nick is considered an \"unreliable " \
+    + "narrator\", a result borne from Gatsby and Nick's interactions.\n" \
+    + "Company X is a trademarked company!\n" \
     + "\n" \
     + "Their trouble and turmoil, unaffected by the biker over.\n" \
-    + "They\'re not really as smart as they look." \
-    + "There is a house on the hill.\n" \
+    + "They\'re not really as smart as they look.\n" \
+    + "There is a house on the hill. Nothing about pods here.\n" \
     + "\n" \
     + "Unfortunately, the enigmatic Gatsby meets his maker and Nick is left to pick up the pieces! The end?"
 

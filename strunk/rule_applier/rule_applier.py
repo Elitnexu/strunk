@@ -52,7 +52,6 @@ class rule_applier(object):
             pass
 
         print("Done!")
-        return self.sentences
 
 
     def get_input(self, text):
@@ -67,7 +66,6 @@ class rule_applier(object):
         print("Action: " + rule.get_action())
         print("Subject:" + rule.get_subject())
         print("--OPTIONS--")
-        #Due to action only being WARNING for now, this is hardcoded.
         print("[E]dit, [I]gnore, [S]kip, Skip [A]ll, [M]ore, [H]elp")
         while True:
             try:
@@ -95,7 +93,7 @@ class rule_applier(object):
                         print(contents)
                 elif response.lower() == self.HELP:
                     #Display help module
-                    self.display_help()
+                    print(self.display_help())
                 else:
                     #Invalid input
                     print("Please enter a valid option.")
@@ -108,17 +106,17 @@ class rule_applier(object):
         return "default"
 
     def display_help(self):
-        print("\n")
-        print("==HELP==")
-        print("[E]dit: Edit the sentence(s) displayed in a text editor")
-        print("[I]gnore: Ignore applying the current rule to the sentence displayed")
-        print("[S]kip: Skip the current rule and start applying next rule")
-        print("Skip [A]ll: Skip all future rules and start writing to file")
-        print("[M]ore Information: Display more information on the current rule")
-        print("[H]elp: Display the Help prompt")
+        return "\n".join([
+            '==HELP==\n', \
+            '[E]dit: Edit the sentence(s) displayed in a text editor\n', \
+            '[I]gnore: Ignore applying the current rule to the sentence displayed\n', \
+            '[S]kip: Skip the current rule and start applying next rule\n', \
+            'Skip [A]ll: Skip all future rules and start writing to file\n', \
+            '[M]ore Information: Display more information on the current rule\n', \
+            '[H]elp: Display the Help prompt'])
 
     def open_editor(self, editor, filepath):
-        return subprocess.Popen([editor, filepath]).wait()
+        subprocess.Popen([editor, filepath]).wait()
 
     def edit_sentence(self, filepath, line, index):
         #write temp file with sentence as only contents
@@ -138,7 +136,7 @@ class rule_applier(object):
 
         #Attempt to open editor and wait until its closed to continue
         try:
-            success = self.open_editor(editor, filepath)
+            self.open_editor(editor, filepath)
             #When done, open and write new sentence to file
         except:
             raise IOError("No valid editor found.")
@@ -149,7 +147,6 @@ class rule_applier(object):
         #Read contents, delete contents when done
         lines = file.read()
         self.parser.set_sentence(index, lines)
-        #sentences[index] = line
         file.truncate(0)
         file.close()
         os.remove(filepath)
