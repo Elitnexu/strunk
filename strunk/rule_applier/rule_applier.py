@@ -57,7 +57,7 @@ class rule_applier(object):
 
     def get_input(self, text):
         return input(text)
-    
+
 
     def handle_rule_match(self, rule, line, index):
 
@@ -117,6 +117,9 @@ class rule_applier(object):
         print("[M]ore Information: Display more information on the current rule")
         print("[H]elp: Display the Help prompt")
 
+    def open_editor(self, editor, filepath):
+        return subprocess.Popen([editor, filepath]).wait()
+
     def edit_sentence(self, filepath, line, index):
         #write temp file with sentence as only contents
         #open with default editor
@@ -135,7 +138,7 @@ class rule_applier(object):
 
         #Attempt to open editor and wait until its closed to continue
         try:
-            subprocess.Popen([editor, filepath]).wait()
+            success = self.open_editor(editor, filepath)
             #When done, open and write new sentence to file
         except:
             raise IOError("No valid editor found.")

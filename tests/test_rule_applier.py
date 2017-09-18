@@ -1,5 +1,6 @@
 import os
 import unittest
+import subprocess
 from mock import patch, PropertyMock #Python 2.7 Compatibility
 import tests.file_setup as file_setup
 import strunk.file_parser.file_parser as file_parser
@@ -66,7 +67,19 @@ class RuleApplierTest(unittest.TestCase):
 
         #Strunked File should equal pre-write file
         self.assertEqual(test_sentences, self.parser.get_sentences())
-        
+
+    def test_edit_sentence(self):
+    #Check file is written as is properly
+        contents = self.applier.parser.get_sentences()
+        contents[0] = 'this will appear in failed test'
+
+        #Patch environment call, editor method call
+        with patch.dict(os.environ, {'EDITOR' : 'vi'}):
+            with patch.object(self.applier, 'open_editor', lambda x,y: None):
+                self.applier.edit_sentence('temp.strunk', 'this is a test', 0)
+                contents = self.applier.parser.get_sentences()
+                self.assertEqual(contents[0], 'this is a test')
+
 
     def test_handle_rule_match(self):
         #Hack for extracting single rule
@@ -87,5 +100,7 @@ class RuleApplierTest(unittest.TestCase):
             with patch.object(self.applier, 'edit_sentence', lambda x,y,z: None):
                 self.assertEqual(self.applier.handle_rule_match(rule, "test", 0), 'default')
     
+    
+
 if __name__ == '__main__':
     unittest.main()
