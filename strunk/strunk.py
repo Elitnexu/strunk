@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #==Strunk==
 #Author: Marc Hanley
 #Commenced: 27/07/2017

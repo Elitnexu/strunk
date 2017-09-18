@@ -54,6 +54,11 @@ class rule_applier(object):
         print("Done!")
         return self.sentences
 
+
+    def get_input(self, text):
+        return input(text)
+    
+
     def handle_rule_match(self, rule, line, index):
 
         SENTENCE_PATH = "temp.strunk"
@@ -62,11 +67,11 @@ class rule_applier(object):
         print("Action: " + rule.get_action())
         print("Subject:" + rule.get_subject())
         print("--OPTIONS--")
-        #Due to action only being WARNING for now, this is static.
+        #Due to action only being WARNING for now, this is hardcoded.
         print("[E]dit, [I]gnore, [S]kip, Skip [A]ll, [M]ore, [H]elp")
         while True:
             try:
-                response = (input("Reply: "))
+                response = self.get_input("Reply: ")
                 if response.lower() == 'e':
                     print("Editing file...")
                     #Edit file with index

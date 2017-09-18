@@ -1,5 +1,6 @@
 import os
 import unittest
+from mock import patch, PropertyMock #Python 2.7 Compatibility
 import tests.file_setup as file_setup
 import strunk.file_parser.file_parser as file_parser
 import strunk.rule_parser.rule_parser as rule_parser
@@ -65,6 +66,26 @@ class RuleApplierTest(unittest.TestCase):
 
         #Strunked File should equal pre-write file
         self.assertEqual(test_sentences, self.parser.get_sentences())
+        
 
+    def test_handle_rule_match(self):
+        #Hack for extracting single rule
+        for rule in self.rules:
+            rule = self.rules[rule]
+            break
+
+        #Check Skip is called
+        with patch.object(self.applier, 'get_input', lambda x: 's'):
+            self.assertEqual(self.applier.handle_rule_match(rule, "test", 0), 'skip')
+
+        #Check Skip All is called
+        with patch.object(self.applier, 'get_input', lambda x: 'a'):
+            self.assertEqual(self.applier.handle_rule_match(rule, "test", 0), 'skip_all')
+        
+        #Check Edit is called
+        with patch.object(self.applier, 'get_input', lambda x: 'e'):
+            with patch.object(self.applier, 'edit_sentence', lambda x,y,z: None):
+                self.assertEqual(self.applier.handle_rule_match(rule, "test", 0), 'default')
+    
 if __name__ == '__main__':
     unittest.main()
