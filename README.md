@@ -17,9 +17,9 @@ Install the dependencies by running `pip install -r requirements.txt` in the roo
 of the project.
 
 ## Running
-In the root directory of Strunk, enter `python3 strunk.py example.txt example.strunk`
+In the root directory of Strunk, enter `python strunk.py example.txt example.strunk`
 at the command line in order to run the ruleset file `example.strunk` on the text document `example.txt`.
-
+Strunk is compatible with both Python 2.7 and Python 3.6.
 ## Testing
 Tests are all included in the `tests` directory. To run them, use the command
 `py.test --cov strunk/` in the root directory.
