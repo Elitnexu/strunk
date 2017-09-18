@@ -13,6 +13,7 @@ class rule_applier(object):
         self.ruleset = ruleset
         self.parser = parser
         self.sentences = parser.get_sentences()
+        self.EDIT = 'e'
         self.SKIP = 's'
         self.SKIP_ALL = 'a'
         self.MORE = 'm'
@@ -70,7 +71,7 @@ class rule_applier(object):
         while True:
             try:
                 response = self.get_input("Reply: ")
-                if response.lower() == 'e':
+                if response.lower() == self.EDIT:
                     print("Editing file...")
                     #Edit file with index
                     self.edit_sentence(SENTENCE_PATH, line, index)

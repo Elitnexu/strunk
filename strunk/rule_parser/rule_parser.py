@@ -95,9 +95,6 @@ class rule_parser(object):
                     spaces = 0
                     continue
                     #Keep going until double space
-            #Somehow you got here
-            else:
-                raise ValueError("Why are you here? Line = " + line)
         if ended:
             return rules
         else:
@@ -114,9 +111,7 @@ class rule_parser(object):
                 print("Default rule file detected.")
                 return self.DEFAULT_RULE_FILE
             else:
-                #Raise error? Create default?
-                print("Default rule file " + self.DEFAULT_RULE_FILE + " not found")
-                sys.exit()
+                raise IOError("Default rule file " + self.DEFAULT_RULE_FILE + " not found")
 
         #Either custom ruleset or syntax error. Check ruleset first.
         else:

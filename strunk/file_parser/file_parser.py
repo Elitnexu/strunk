@@ -41,9 +41,6 @@ class file_parser(object):
         for line in self.get_file():
             self.sentences.append(line)
 
-    #Set ruleset dictionary
-    def set_ruleset(self, ruleset):
-        self.ruleset = ruleset
 
     def set_file_path(self, filepath):
         self.filepath = filepath

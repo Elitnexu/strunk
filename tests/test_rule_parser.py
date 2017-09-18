@@ -1,3 +1,4 @@
+import os
 import unittest
 import tests.file_setup as file_setup
 import strunk.rule_parser.rule_parser as rule_parser
@@ -16,6 +17,9 @@ class RuleParserTest(unittest.TestCase):
 
     def test_get_strunk_path(self):
         #No argument given, so return the default file
+        f = open(".strunk", "w+")
+        f.write('test')
+        f.close()
         ruleset.args = None
         self.assertEqual(
         ruleset.get_strunk_path(), ".strunk"
@@ -32,6 +36,10 @@ class RuleParserTest(unittest.TestCase):
         self.assertRaises(
         ValueError, lambda: ruleset.get_strunk_path()
         )
+
+        ruleset.args = None
+        os.remove('.strunk')
+        self.assertRaises(IOError, lambda: ruleset.get_strunk_path())
 
     def test_process_ruleset(self):
         #Preparation for tests
