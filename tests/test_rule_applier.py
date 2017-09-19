@@ -122,8 +122,8 @@ class RuleApplierTest(unittest.TestCase):
 
     def test_display_help(self):
         applier = rule_applier.rule_applier(self.rules, self.parser)
-        contents = "\n".join([
-        "==HELP==\n",
+        contents = "".join([
+        "\n==HELP==\n",
         "[E]dit: Edit the sentence(s) displayed in a text editor\n",
         "[I]gnore: Ignore applying the current rule to the sentence displayed\n",
         "[S]kip: Skip the current rule and start applying next rule\n",

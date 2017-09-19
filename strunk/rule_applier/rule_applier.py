@@ -107,8 +107,8 @@ class rule_applier(object):
         return "default"
 
     def display_help(self):
-        return "\n".join([
-            '==HELP==\n', \
+        return "".join([
+            '\n==HELP==\n', \
             '[E]dit: Edit the sentence(s) displayed in a text editor\n', \
             '[I]gnore: Ignore applying the current rule to the sentence displayed\n', \
             '[S]kip: Skip the current rule and start applying next rule\n', \

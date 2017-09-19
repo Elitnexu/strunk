@@ -1,6 +1,7 @@
+from __future__ import absolute_import
 import unittest
 import os
-import file_setup
+from . import file_setup
 import strunk.file_parser.file_parser as file_parser
 #import os
 
