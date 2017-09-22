@@ -123,7 +123,6 @@ class rule_applier(object):
         #write temp file with sentence as only contents
         #open with default editor
         #take file changes and save as new sentence index
-        line = line.strip()
         file = self.open_file(filepath, "w+")
         file.write(line)
         file.close()
